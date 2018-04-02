@@ -1,0 +1,15 @@
+*** Title:
+
+
+.tran 1.000000e-007 2.000000e-004 start=0.000000e+000
+
+.probe tran v(port_l_6) v(port_h_5) v(port_dn1_4) v(port_up1_7) v(n_12) v(port_r_10) v(n_11) v(port_dn1_4) v(port_up1_7) v(port_ww_14) v(n_13) v(x_d1.n_18) v(x_d1.n_17) v(x_d1.n_24) v(x_d1.n_7) v(x_d1.n_14) v(x_d1.n_15) v(x_d1.n_35) v(x_d1.n_6)
+.probe i1(x_d1.m_m1_0) i1(x_d1.m_m4_33) i1(x_d1.m_m7_34) i1(x_d1.m_m10_35) i1(x_d1.m_m13_36) i1(x_d1.m_m16_37) i1(x_d1.m_m19_38) i1(x_d1.m_m22_39) i3(x_d1.m_m25_40) i3(x_d1.m_m28_41) i3(x_d1.m_m31_42) i3(x_d1.m_m34_43) i3(x_d1.m_m37_44)
++ i3(x_d1.m_m40_45) i3(x_d1.m_m43_46) i3(x_d1.m_m46_47) i3(x_d1.x_da1.m_m11_8) i1(m_m1_15) i3(x_d1.x_da1.m_m2_2) i1(x_d1.x_da1.m_m3_10) i3(x_d1.x_da1.m_m7_0) i1(x_d1.x_da1.m_m11_8)
+
+.options probe post apb=1
+
+.temp 2.700000e+001
+
+.options tnom=2.700000e+001
+

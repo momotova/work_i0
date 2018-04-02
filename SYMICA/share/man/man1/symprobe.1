@@ -1,0 +1,58 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH SYMPROBE 1 "February  3, 2012"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+symprobe \- Symica waveform viewer
+.SH SYNOPSIS
+.B symprobe
+.RI [ options ]  
+.RI [ file ] " ...
+.SH DESCRIPTION
+This manual page documents briefly the
+.B symprobe
+command.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+\fBsymprobe\fP is a waveform viewer and analog simulation result analyzer. SymProbe offers all the functions designers expect in a convenient graphical interface.
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-v, \-\-version
+Show version of program.
+.TP
+.B \-c    
+Indicates that symprobe will apply certain session settings stored in file \fBview.ppw\fP, placed in the same directory where <file> is.
+To renew session settings to \fBview.ppw\fP choose menu <View>\\<Save view to disk>.
+.SH SEE ALSO
+.BR symicade (1),
+.BR symspice (1),
+.BR symlayout (1).
+.br
+The programs are documented fully by \fISymProbe.pdf\fP.
+.SH AUTHOR
+symprobe was written by 
+.B symica.com
+.
+.PP
+This manual page was written by Symica support <support@symica.com> 

@@ -1,0 +1,91 @@
+[2018-03-12 21:32:31] alias_delete_execute
+alias_delete_execute () 
+{ 
+    for _path in "$rvm_rubies_path" "$rvm_environments_path" "$rvm_wrappers_path";
+    do
+        if [[ -L "$_path/$1" ]]; then
+            \command \rm -fv "$_path/$1" || return $?;
+        fi;
+    done;
+    __rvm_db_ "$rvm_path/config/alias" "$1" "delete";
+    alias_after_delete_default "$1" || return $?
+}
+current path: /home/olya
+GEM_HOME=/home/olya/.rvm/gems/ruby-2.5.0
+PATH=/home/olya/.rvm/gems/ruby-2.5.0/bin:/home/olya/.rvm/gems/ruby-2.5.0@global/bin:/home/olya/.rvm/rubies/ruby-2.5.0/bin:/home/olya/.rvm/bin:/home/olya/bin:/home/olya/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/olya/SYMICA/bin
+GEM_PATH=/home/olya/.rvm/gems/ruby-2.5.0:/home/olya/.rvm/gems/ruby-2.5.0@global
+command(2): alias_delete_execute default
++ for _path in '"$rvm_rubies_path"' '"$rvm_environments_path"' '"$rvm_wrappers_path"'
++ [[ -L /home/olya/.rvm/rubies/default ]]
++ command rm -fv /home/olya/.rvm/rubies/default
++ rm -fv /home/olya/.rvm/rubies/default
+removed '/home/olya/.rvm/rubies/default'
++ for _path in '"$rvm_rubies_path"' '"$rvm_environments_path"' '"$rvm_wrappers_path"'
++ [[ -L /home/olya/.rvm/environments/default ]]
++ command rm -fv /home/olya/.rvm/environments/default
++ rm -fv /home/olya/.rvm/environments/default
+removed '/home/olya/.rvm/environments/default'
++ for _path in '"$rvm_rubies_path"' '"$rvm_environments_path"' '"$rvm_wrappers_path"'
++ [[ -L /home/olya/.rvm/wrappers/default ]]
++ command rm -fv /home/olya/.rvm/wrappers/default
++ rm -fv /home/olya/.rvm/wrappers/default
+removed '/home/olya/.rvm/wrappers/default'
++ __rvm_db_ /home/olya/.rvm/config/alias default delete
++ typeset __db __key __value
++ __db=/home/olya/.rvm/config/alias
++ __key=default
++ shift 2
++ __value=delete
++ case "${__value}" in
++ __rvm_db_remove /home/olya/.rvm/config/alias default
++ [[ -f /home/olya/.rvm/config/alias ]]
++ __rvm_sed -e '\#^default=# d' -e '/^$/d' /home/olya/.rvm/config/alias
++ sed -e '\#^default=# d' -e '/^$/d' /home/olya/.rvm/config/alias
++ command mv -f /home/olya/.rvm/config/alias.new /home/olya/.rvm/config/alias
++ mv -f /home/olya/.rvm/config/alias.new /home/olya/.rvm/config/alias
++ alias_after_delete_default default
++ [[ default == \d\e\f\a\u\l\t ]]
++ for _path in '"$rvm_bin_path"/default_*'
++ [[ -f /home/olya/.rvm/bin/default_* ]]
++ _path='/home/olya/.rvm/bin/default_*'
++ [[ -f /home/olya/.rvm/bin/default_* ]]
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path='*'
++ command rm -fv '/home/olya/.rvm/bin/*'
++ rm -fv '/home/olya/.rvm/bin/*'
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=gem
++ command rm -fv /home/olya/.rvm/bin/gem
++ rm -fv /home/olya/.rvm/bin/gem
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=irb
++ command rm -fv /home/olya/.rvm/bin/irb
++ rm -fv /home/olya/.rvm/bin/irb
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=erb
++ command rm -fv /home/olya/.rvm/bin/erb
++ rm -fv /home/olya/.rvm/bin/erb
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=ri
++ command rm -fv /home/olya/.rvm/bin/ri
++ rm -fv /home/olya/.rvm/bin/ri
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=rdoc
++ command rm -fv /home/olya/.rvm/bin/rdoc
++ rm -fv /home/olya/.rvm/bin/rdoc
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=testrb
++ command rm -fv /home/olya/.rvm/bin/testrb
++ rm -fv /home/olya/.rvm/bin/testrb
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=rake
++ command rm -fv /home/olya/.rvm/bin/rake
++ rm -fv /home/olya/.rvm/bin/rake
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=ruby
++ command rm -fv /home/olya/.rvm/bin/ruby
++ rm -fv /home/olya/.rvm/bin/ruby
++ for _path in '"$rvm_path"/wrappers/default/*' gem irb erb ri rdoc testrb rake ruby bundle
++ _path=bundle
++ command rm -fv /home/olya/.rvm/bin/bundle
++ rm -fv /home/olya/.rvm/bin/bundle

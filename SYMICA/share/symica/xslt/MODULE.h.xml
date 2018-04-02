@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!DOCTYPE admst SYSTEM "admst.dtd">
+<admst version="2.2.9" xmlns:admst="http://mot-adms.sourceforge.net/xml-files/admst">
+
+<admst:template match="macros_definition">
+  <admst:variable name="module" select="%(name)"/>
+#ifndef MFACTOR_
+#define MFACTOR_ _ipa(m)
+
+#define $(module)TABLE_FILE_NAME "$(module).dat"
+
+#define _na(p)  NodePot_ ## p
+#define NP(p)   NodePot_ ## p
+#define BP(p,n) (NP(p)-NP(n))
+
+#define _shrinkl(val,arg)   val=1.0;
+#define _shrinka(val,arg)   val=1.0;
+
+#define _current_time (pKMS-&gt;GetCurrentDynTimeInSec())
+#define _circuit_temp (pKMS-&gt;GetOption()-&gt;temper+273.15)
+#define _circuit_tnom (pKMS-&gt;GetOption()-&gt;GetTnom(bSpectre)+273.15)
+#define _get_simparam_nd(name) pKMS-&gt;ReadOptionDef(name, 0.0)
+#define _get_simparam(name, def_val) pKMS-&gt;ReadOptionDef(name, def_val)
+#define _gmin_used    (pKMS-&gt;GetKipGMinUsed())
+#define CHARGE (1.6021918e-19)
+#define CONSTCtoK (273.15)
+#define CONSTboltz (1.3806226e-23)
+#define REFTEMP 300.15 /* 27 degrees C */
+#define _vt_nom      (0.861708692e-4 * _circuit_temp)
+#define _vt(arg)     (0.861708692e-4 * arg)
+#define _floor(val,arg)          val = floor((REAL)arg);
+#define _d_floor(val,dval,arg)   val = floor((REAL)arg);   dval = 0.0;
+#define _ceil(val,arg)           val = ceil((REAL)arg);
+#define _d_ceil(val,dval,arg)    val = ceil((REAL)arg);    dval = 0.0;
+#define _cos(val,arg)            val = cos((REAL)arg);
+#define _d_cos(val,dval,arg)     val = cos((REAL)arg);     dval = (-sin((REAL)arg));
+#define _sin(val,arg)            val = sin((REAL)arg);
+#define _d_sin(val,dval,arg)     val = sin((REAL)arg);     dval = (cos((REAL)arg));
+#define _tan(val,arg)            val = tan((REAL)arg);
+#define _d_tan(val,dval,arg)     val = tan((REAL)arg);     dval = (1.0/cos((REAL)arg)/cos((REAL)arg));
+#define _hypot(xy,x,y)           xy = sqrt((x)*(x)+(y)*(y));
+#define _dx_hypot(dx,xy,x,y)     dx = (x)/(xy);
+#define _dy_hypot(dy,xy,x,y)     dy = (y)/(xy);
+#define _max(xy,x,y)             xy = ((x)&gt;(y))?(x):(y);
+#define _dx_max(dx,xy,x,y)       dx = ((x)&gt;(y))?1.0:0.0;
+#define _dy_max(dy,xy,x,y)       dy = ((x)&gt;(y))?0.0:1.0;
+#define _min(xy,x,y)             xy = ((x)&lt;(y))?(x):(y);
+#define _dx_min(dx,xy,x,y)       dx = ((x)&lt;(y))?1.0:0.0;
+#define _dy_min(dy,xy,x,y)       dy = ((x)&lt;(y))?0.0:1.0;
+#define _cosh(val,arg)           val = cosh((REAL)arg);
+#define _d_cosh(val,dval,arg)    val = cosh((REAL)arg);    dval = (sinh((REAL)arg));
+#define _sinh(val,arg)           val = sinh((REAL)arg);
+#define _d_sinh(val,dval,arg)    val = sinh((REAL)arg);    dval = (cosh((REAL)arg));
+#define _tanh(val,arg)           val = tanh((REAL)arg);
+#define _d_tanh(val,dval,arg)    val = tanh((REAL)arg);    dval = (1.0/cosh((REAL)arg)/cosh((REAL)arg));
+#define _acos(val,arg)           val = acos((REAL)arg);
+#define _d_acos(val,dval,arg)    val = acos((REAL)arg);    dval = (-1.0/sqrt(1.0-(REAL)arg*arg));
+#define _asin(val,arg)           val = asin((REAL)arg);
+#define _d_asin(val,dval,arg)    val = asin((REAL)arg);    dval = (+1.0/sqrt(1.0-(REAL)arg*arg));
+#define _atan(val,arg)           val = atan((REAL)arg);
+#define _d_atan(val,dval,arg)    val = atan((REAL)arg);    dval = (+1.0/(1.0+(REAL)arg*arg));
+#define _atan2(xy,x,y)           xy = atan2((REAL)x,(REAL)y);
+#define _dx_atan2(dx,xy,x,y)     dx = (+1.0/(1.0+((REAL)x/y)*((REAL)x/y)))*(+1.0/(REAL)y);
+#define _dy_atan2(dy,xy,x,y)     dy = (+1.0/(1.0+((REAL)x/y)*((REAL)x/y)))*(-(REAL)x/((REAL)y*y));
+#define _asinh(val,arg)          val = KIP_LOG((REAL)arg+sqrt((REAL)arg*(REAL)arg+1.0));
+#define _d_asinh(val,dval,arg)   val = KIP_LOG((REAL)arg+sqrt((REAL)arg*(REAL)arg+1.0));    dval = (1.0/sqrt((REAL)arg*(REAL)arg+1.0));
+#define _acosh(val,arg)          val = KIP_LOG((REAL)arg+sqrt((REAL)arg*(REAL)arg-1.0));
+#define _d_acosh(val,dval,arg)   val = KIP_LOG((REAL)arg+sqrt((REAL)arg*(REAL)arg-1.0));    dval = (1.0/sqrt((REAL)arg*(REAL)arg-1.0));
+#define _atanh(val,arg)          val = 0.5*KIP_LOG((1.0+(REAL)arg)/(1.0-(REAL)arg));
+#define _d_atanh(val,dval,arg)   val = 0.5*KIP_LOG((1.0+(REAL)arg)/(1.0-(REAL)arg));    dval = ((1.0+(REAL)arg)/(1.0-(REAL)arg));
+#define _logE(val,arg)           val = KIP_LOG((REAL)arg);
+#define _d_logE(val,dval,arg)    val = KIP_LOG((REAL)arg);     dval = (1.0/arg);
+#define _log10(val,arg)          val = log10((REAL)arg);
+#define _d_log10(val,dval,arg)   val = log10((REAL)arg);   dval = (1.0/arg/KIP_LOG(10.0));
+#define _exp(val,arg)            val = KIP_EXP((REAL)arg);
+#define _d_exp(val,dval,arg)     val = KIP_EXP((REAL)arg);     dval = val;
+#define _sqrt(val,arg)           val = sqrt((REAL)arg);
+#define _d_sqrt(val,dval,arg)    if(arg &gt; 0.0) { val = sqrt((REAL)arg);    dval = 0.5/val; } else { val = 0.0; dval = 1E28; }
+#define _pow(xy,x,y)             xy = (x &gt; 0.0) ? KIP_EXP(y*KIP_LOG((REAL)x)) : pow((REAL)x,y);
+#define _dx_pow(dx,xy,x,y)       dx = (x==0.0)?0.0:((y/x)*xy);
+#define _dy_pow(dy,xy,x,y)       dy = (x&lt;=0.0)?0.0:(KIP_LOG((REAL)x)*xy);
+#define _pwr(xy,x,y)             xy = (x &gt; 0.0) ? KIP_EXP(y*KIP_LOG((REAL)x)) : -pow(-x,y);
+#define _dx_pwr(dx,xy,x,y)       dx = (x==0.0)?0.0:(x&gt;0.0)?((y/x)*xy):((y/(-x))*xy);
+#define _dy_pwr(dy,xy,x,y)       dy = (x==0.0)?0.0:(x&gt;0.0)?(KIP_LOG((REAL)x)*xy):(KIP_LOG((REAL)-x)*xy);
+#define _fabs(val,arg)           val = fabs(arg);
+#define _d_fabs(val,dval,arg)    val = fabs(arg);    dval = (((arg)==0)?0.0:((arg)&gt;0)?(+1.0):(-1.0));
+#define _int(val,arg)            val = (int)(arg);
+#define _d_int(val,dval,arg)     val = (int)(arg);   dval = 0.0;
+#define _abs(val)                ((val)&lt;(0) ? (-(val)):(val))
+
+#define  _high_limit_exp 150
+#define  _low_limit_exp  -100.0
+
+#define _limexp(val,arg)\\
+{\\
+  REAL  maxX;\\
+  _max(maxX,arg, _low_limit_exp)\\
+  REAL  minX;\\
+  _min(minX,maxX,_high_limit_exp)\\
+  val = KIP_EXP(minX);\\
+}
+
+#define _d_limexp(val,dval,arg)\\
+{\\
+  REAL  maxX;\\
+  _max(maxX,arg, _low_limit_exp)\\
+  REAL  minX;\\
+  _min(minX,maxX,_high_limit_exp)\\
+  val = KIP_EXP(minX);\\
+  dval = val;\\
+}
+
+
+#define _load_modpinlinks(Sp,Pp)\\
+{\\
+if(Sp >= 0 &amp;&amp; Pp >= 0) ppModPinLinks[Sp][Pp] = 1;\\
+}
+
+#define _load_static_static_jacobian4(Sp,Sn,Pp,Pn,v)\\
+{\\
+REAL vv = v;\\
+*pYY_ ## Sp ## _ ## Pp -=vv;\\
+*pYY_ ## Sn ## _ ## Pn -=vv;\\
+*pYY_ ## Sp ## _ ## Pn +=vv;\\
+*pYY_ ## Sn ## _ ## Pp +=vv;\\
+}
+#define _load_static_static_jacobian2s(Sp,Sn,Pp,v)\\
+{\\
+REAL vv = v;\\
+*pYY_ ## Sp ## _ ## Pp -=vv;\\
+*pYY_ ## Sn ## _ ## Pp +=vv;\\
+}
+#define _load_static_static_jacobian2p(Sp,Pp,Pn,v)\\
+{\\
+REAL vv = v;\\
+*pYY_ ## Sp ## _ ## Pp -=vv;\\
+*pYY_ ## Sp ## _ ## Pn +=vv;\\
+}
+#define _load_static_static_jacobian1(Sp,Pp,v)\\
+{\\
+REAL vv = v;\\
+*pYY_ ## Sp ## _ ## Pp -=vv;\\
+}
+
+#define _load_static_dynamic_jacobian4(Sp,Sn,Pp,Pn,v)\\
+{\\
+REAL vv = v;\\
+*pCC_ ## Sp ## _ ## Pp -=vv;\\
+*pCC_ ## Sn ## _ ## Pn -=vv;\\
+*pCC_ ## Sp ## _ ## Pn +=vv;\\
+*pCC_ ## Sn ## _ ## Pp +=vv;\\
+}
+#define _load_static_dynamic_jacobian2s(Sp,Sn,Pp,v)\\
+{\\
+REAL vv = v;\\
+*pCC_ ## Sp ## _ ## Pp -=vv;\\
+*pCC_ ## Sn ## _ ## Pp +=vv;\\
+}
+#define _load_static_dynamic_jacobian2p(Sp,Pp,Pn,v)\\
+{\\
+REAL vv = v;\\
+*pCC_ ## Sp ## _ ## Pp -=vv;\\
+*pCC_ ## Sp ## _ ## Pn +=vv;\\
+}
+#define _load_static_dynamic_jacobian1(Sp,Pp,v)\\
+{\\
+REAL vv = v;\\
+*pCC_ ## Sp ## _ ## Pp -=vv;\\
+}
+
+#define _load_static_residual2(p,n,v)\\
+{\\
+REAL vv = v;\\
+*pR_ ## p +=vv;\\
+*pR_ ## n -=vv;\\
+REAL va=fabs(vv);\\
+*pR_ ## p ## _a +=va;\\
+*pR_ ## n ## _a +=va;\\
+}
+#define _load_static_residual1(p,v)\\
+{\\
+REAL vv = v;\\
+*pR_ ## p +=vv;\\
+*pR_ ## p ## _a +=fabs(vv);\\
+}
+
+#define _load_dynamic_residual2(p,n,v)\\
+{\\
+REAL vv = v;\\
+*pQ_ ## p +=vv;\\
+*pQ_ ## n -=vv;\\
+REAL va=fabs(vv);\\
+*pQA_ ## p +=va;\\
+*pQA_ ## n +=va;\\
+}
+#define _load_dynamic_residual1(p,v)\\
+{\\
+REAL vv = v;\\
+*pQ_ ## p +=vv;\\
+*pQA_ ## p +=fabs(vv);\\
+}
+
+#define  _load_static_static_I4VI_probe(p)\\
+_load_static_residual1(p ##_flow,- BP(p,p ##_probe))\\
+_load_static_residual2(p,p ##_probe,NP(p ##_flow))\\
+_load_static_static_jacobian2s(p,p ##_probe,p ##_flow,1.0)\\
+_load_static_static_jacobian2p(p ##_flow,p,p ##_probe,-1.0)
+
+#define _declr_row_addr(p)\\
+  REAL R_ ## p;\\
+  REAL *pR_ ## p;\\
+  REAL R_ ## p ## _a;\\
+  REAL *pR_ ## p ## _a;\\
+  REAL Q_ ## p;\\
+  REAL *pQ_ ## p;\\
+  REAL QA_ ## p;\\
+  REAL *pQA_ ## p;
+
+#define _init_row_addr(p)\\
+  pR_ ## p = &amp;R_ ## p;\\
+  pR_ ## p ## _a = &amp;R_ ## p ## _a;\\
+  pQ_ ## p = &amp;Q_ ## p;\\
+  pQA_ ## p = &amp;QA_ ## p;
+
+#define _compress_row_addr(p)\\
+  if(p >= 0)\\
+  {\\
+    if(compressRA[p] != 0)\\
+    {\\
+      pR_ ## p = compressRA[p];\\
+      pR_ ## p ## _a = compressRAA[p];\\
+      pQ_ ## p = compressRQA[p];\\
+      pQA_ ## p = compressRQAA[p];\\
+    }\\
+    else\\
+    {\\
+      compressRA[p] = pR_ ## p;\\
+      compressRAA[p] = pR_ ## p ## _a;\\
+      compressRQA[p] = pQ_ ## p;\\
+      compressRQAA[p] = pQA_ ## p;\\
+    }\\
+  }
+
+#define _save_row_addr(p)\\
+{\\
+  if(p >= 0)\\
+  {\\
+    CondCurRI[p].first = RInfoArr[p].first;\\
+    CondCurRI[p].second = pR_ ## p;\\
+    CondCurRAI[p].first = RInfoArr[p].second;\\
+    CondCurRAI[p].second = pR_ ## p ## _a;\\
+    CondCurRQI[p].first = RQInfoArr[p].first;\\
+    CondCurRQI[p].second = pQ_ ## p;\\
+    CondCurRQAI[p].first = RQInfoArr[p].second;\\
+    CondCurRQAI[p].second = pQA_ ## p;\\
+  }\\
+}
+
+#define _declr_matrix_addr(p, n)\\
+  REAL YY_ ## p ## _ ## n;\\
+  REAL *pYY_ ## p ## _ ## n;\\
+  REAL CC_ ## p ## _ ## n;\\
+  REAL *pCC_ ## p ## _ ## n;
+
+#define _init_matrix_addr(p, n)\\
+  pYY_ ## p ## _ ## n = &amp;YY_ ## p ## _ ## n;\\
+  pCC_ ## p ## _ ## n = &amp;CC_ ## p ## _ ## n;
+
+#define _compress_matrix_addr(p, n)\\
+  if(p >= 0 &amp;&amp; n >= 0)\\
+  {\\
+    if(compressYA[p][n] != 0)\\
+    {\\
+      pYY_ ## p ## _ ## n = compressYA[p][n];\\
+      pCC_ ## p ## _ ## n = compressCA[p][n];\\
+    }\\
+    else\\
+    {\\
+      compressYA[p][n] = pYY_ ## p ## _ ## n;\\
+      compressCA[p][n] = pCC_ ## p ## _ ## n;\\
+    }\\
+  }
+
+#define _save_matrix_addr(p, n)\\
+{\\
+  if(p >= 0 &amp;&amp; n >= 0)\\
+  {\\
+    if(!MatrInfoArr[p].empty() &amp;&amp; MatrInfoArr[p][n])\\
+    {\\
+      YCI yci = { n, MatrInfoArr[p][n], pYY_ ## p ## _ ## n, pCC_ ## p ## _ ## n, &amp;pYY_ ## p ## _ ## n, &amp;pCC_ ## p ## _ ## n };\\
+      CondCurYCI[p].push_back(yci);\\
+    }\\
+  }\\
+}
+
+#endif // MFACTOR_
+\n
+</admst:template>
+
+<admst:template match="code">
+
+  <!--Init MatrAddrsList and other lists-->
+  <admst:apply-templates select="." match="InitContributionBranchProcessed"/>
+  <admst:apply-templates select="analog" match="analog:evaluate"/>
+  <!---->
+
+  <admst:apply-templates select="." match="macros_definition"/>
+
+  <admst:text format="typedef enum{\n"/>
+  <admst:for-each select="variable[(parametertype='model' or (parametertype='instance' and #subtype_both='yes')) and input='yes']">
+    <admst:text format="  $(module)_MODEL_INPUT_%(name),\n"/>
+  </admst:for-each>
+  <admst:text format="  $(module)_SIZE_OF_MODEL_INPUT_PARAMETERS\n"/>
+  <admst:text format="} e_$(module)_modelParameters;\n"/>
+
+  <admst:text format="\ntypedef enum{\n"/>
+  <admst:for-each select="variable[(parametertype='instance' or (parametertype='model' and #subtype_both='yes')) and input='yes']">
+    <admst:text format="  $(module)_INSTANCE_INPUT_%(name),\n"/>
+  </admst:for-each>
+  <admst:text format="  $(module)_SIZE_OF_INSTANCE_INPUT_PARAMETERS\n"/>
+  <admst:text format="} $(module)instance;\n"/>
+
+
+class C$(module)ModelInfo : public CTypeModelInfo
+{
+public:
+
+  C$(module)ModelInfo(CKiparisMods *pKipServ);
+  ~C$(module)ModelInfo();
+
+  const char* KIP_API_TYPE GetTypeCh() { return &quot;$(module)&quot;; }
+  int32 KIP_API_TYPE CreateModelInst(DataDoc *pDoc,Element *pEl,CParError *pParErrRet);
+
+  CTypeTable* KIP_API_TYPE GetNewTypeTable(char *pFileName);
+};
+
+<admst:template match="struct_model_variable">
+  /* Model variables which are evaluated at once */\n
+  <admst:for-each select="variable[#model_once = 'yes']">
+    <admst:text format="  "/>
+    <admst:apply-templates select="." match="dectype"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+  /* Model variables which are shared between CreatePar and instance functions */\n
+  <admst:for-each select="variable[#model_shared = 'yes']">
+    <admst:text format="  "/>
+    <admst:apply-templates select="." match="dectype"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+</admst:template>
+
+struct $(module)_struct_of_ModelParameters
+{
+  /* Model parameters which are got from netlist */\n
+  <admst:for-each select="variable[(parametertype='model' or (parametertype='instance' and #subtype_both='yes')) and input='yes']">
+    <admst:apply-templates select="." match="dectype_par"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+  <!--analog block variables process like module variables-->
+  <admst:apply-templates select="." match="struct_model_variable"/>
+  <admst:apply-templates select="analog/code" match="struct_model_variable"/>
+};
+
+<admst:template match="struct_instance_variable">
+  /* Instance variables which are evaluated at once */\n
+  <admst:for-each select="variable[#instance_once = 'yes']">
+    <admst:text format="  "/>
+    <admst:apply-templates select="." match="dectype"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+  /* Instance variables which are shared between CreatePar and instance functions */\n
+  <admst:for-each select="variable[#instance_shared = 'yes']">
+    <admst:text format="  "/>
+    <admst:apply-templates select="." match="dectype"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+</admst:template>
+
+struct $(module)_struct_of_InstanceParameters
+{
+  /* Instance parameters which are from netlist */\n
+  <admst:for-each select="variable[(parametertype='instance' or (parametertype='model' and #subtype_both='yes')) and input='yes']">
+    <admst:apply-templates select="." match="dectype_par"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+  <admst:apply-templates select="." match="struct_instance_variable"/>
+  <admst:apply-templates select="analog/code" match="struct_instance_variable"/>
+
+  <admst:if test="$spec_func_list/item[name='\$connect_internal_nodes_to_element']">
+  /* Internal nodes connect to special element */\n
+  Element *pConToElem;
+  </admst:if>
+};
+
+struct $(module)_OP_parameters
+{\n
+  <admst:for-each select="variable[#op_parameter = 'yes']">
+    <admst:text format="  "/>
+    <admst:apply-templates select="." match="dectype"/>
+    <admst:text format="%(name);"/>
+    <admst:if test="attribute[name='info' or name='desc']">
+      <admst:text format="\t\t/*%(attribute[name='info' or name='desc']/value)*/"/>
+    </admst:if>
+    <admst:text format="\n"/>
+  </admst:for-each>
+};
+
+class $(module)_Model
+{
+public:
+
+  int32 error;
+
+  $(module)_struct_of_ModelParameters $(module)ModelParameter;
+  $(module)_struct_of_InstanceParameters $(module)InstanceParameter;
+
+  GrpParName *pGrPar;
+  IndParName *pInPar;
+
+  bOOL bSpectre;
+  ModKip *pModCur;
+  DataDoc *pDataDoc;
+
+  $(module)_Model(GrpParName *_pGrPar, IndParName *_pInPar, DataDoc *_pDataDoc);
+  ~$(module)_Model();
+
+  int32 PreCreatePar();
+  int32 PostCreatePar();
+  int32 CreatePar(ModKip*,CParError *pParErrRet);
+
+  DataDoc *GetDataDoc() {return pDataDoc;}
+  int32 ConvertValString(ParamT *pParT,int32 i, int32 isIG, std::vector&lt;std::string&gt; *retVal,CParError *pParErrRet);
+  int32 ConvertValString(ParamT *pParT,int32 i, int32 isIG, std::string *retVal,CParError *pParErrRet);
+  int32 ConvertValInt(ParamT *pParT,int32 i, int32 isIG, std::vector&lt;ptrdiff_t&gt; *retVal,CParError *pParErrRet);
+  int32 ConvertValInt(ParamT *pParT,int32 i, int32 isIG, ptrdiff_t *retVal,CParError *pParErrRet);
+  int32 ConvertVal(ParamT *pParT,int32 i, int32 isIG, std::vector&lt;REAL&gt; *retVal,CParError *pParErrRet);
+  int32 ConvertVal(ParamT *pParT,int32 i, int32 isIG, REAL *retVal,CParError *pParErrRet);
+  int32 ConvertVal(_TCHAR *pStrParam, int32 isIG, REAL *retVal);
+};
+
+#ifdef _mpa
+#undef _mpa
+#endif
+
+#ifdef _ipa
+#undef _ipa
+#endif
+
+#define _mpa(p) $(module)Par-&gt;$(module)ModelParameter.p
+#define _ipa(p) $(module)Par-&gt;$(module)InstanceParameter.p
+
+#ifdef _mpg
+#undef _mpg
+#endif
+
+#ifdef _ipg
+#undef _ipg
+#endif
+
+#define _mpg(p) ($(module)Par-&gt;pGrPar-&gt;par-&gt;data[$(module)_MODEL_INPUT_ ##p].toText().empty() ? 0 : 1)
+#define _ipg(p) ($(module)Par-&gt;pInPar-&gt;par-&gt;data[$(module)_INSTANCE_INPUT_ ##p].toText().empty() ? 0 : 1)
+
+#include &lt;map&gt;
+
+using namespace std;
+
+class $(module)TableData
+{
+  public:
+
+  <admst:for-each select="$spec_func_list/item[name='\$table_func']">
+    <admst:text format="    CTableBase *pTableB_%(unique_id);\n"/>
+  </admst:for-each>
+};
+
+class $(module)ClonData
+{
+public:
+
+    $(module)_Model *$(module)Par;
+
+    $(module)TableData TableData;
+};
+
+class $(module)_Instance :  public ModKip
+{
+public:
+
+  $(module)_Model *$(module)Par;
+  int32 SIZE_OF_NODES_$(module);
+
+  bOOL Cloning;
+  bOOL Tabling;
+
+  /* Instance variables which are shared between instance evaluate functions */\n
+  <admst:for-each select="variable[#instance_internal = 'yes']">
+    <admst:text format="  "/>
+    <admst:apply-templates select="." match="dectype"/>
+    <admst:text format="%(name);\n"/>
+  </admst:for-each>
+
+  /**/\n
+  <admst:for-each select="node[location='external' or location='internal']">
+    <admst:text format="  _declr_row_addr(%(name));\n"/>
+  </admst:for-each>
+  <admst:for-each select="$MatrAddrsList/item">
+    <admst:text format="  _declr_matrix_addr(%(.));\n"/>
+  </admst:for-each>
+
+  $(module)_Instance(CTypeModelInfo *_pTypeModInfo);
+
+  $(module)_Instance(CTypeModelInfo *_pTypeModInfo,
+                     bOOL _Cloning,
+                     bOOL,
+                     GrpParName *_pGrPar,
+                     IndParName *_pInPar,
+                     int32,
+                     DataDoc *_pDataDoc);
+
+  $(module)_Instance(CTypeModelInfo *_pTypeModInfo,
+                     bOOL _Cloning,
+                     bOOL,
+                     void *pClonD);
+
+  ~$(module)_Instance()
+  {
+    if(fALSE == Cloning)
+    {
+      delete $(module)Par;
+      $(module)Par=0;
+    }
+
+////////  Tables realised with cloning mechanism => do not delete them - they deleted by another way.
+
+  <admst:for-each select="$spec_func_list/item[name='absdelay']">
+    <admst:text format="    if(pAbsDel_%(unique_id)) delete pAbsDel_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='transition']">
+    <admst:text format="    if(pTrans_%(unique_id)) delete pTrans_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='\$random']">
+    <admst:text format="    if(pRand_%(unique_id)) delete pRand_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='\$bound_step']">
+    <admst:text format="    if(pBStep_%(unique_id)) delete pBStep_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='\$table_model' or name='\$table_model_dim_max']">
+    <admst:text format="    if(pTabMod_%(unique_id)) delete pTabMod_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="block[name='cross']">
+    <admst:value-of select="index(module/block[name='cross'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="    if(pCross_$(index)) delete pCross_$(index);\n"/>
+  </admst:for-each>
+  <admst:for-each select="block[name='timer']">
+    <admst:value-of select="index(module/block[name='timer'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="    if(pTimer_$(index)) delete pTimer_$(index);\n"/>
+  </admst:for-each>
+  }
+
+  void* KIP_API_TYPE NewSubModel(GrpParName *pGrpParEl,IndParName *pIndParEl,int32 *pErr);
+  void* KIP_API_TYPE GetSubModel();
+  void KIP_API_TYPE PutSubModel(void *pSubMod);
+  void KIP_API_TYPE ClearSubMod(void *pSubMod);
+
+  void KIP_API_TYPE ClearTable(void *pTableData);
+
+/////// for table model
+  void PutTable();
+  void PutTablesOld($(module)TableData *pTableData);
+  void PutTablesNew();
+
+  REAL KIP_API_TYPE GetDataAt(CTableBase *pTableB, REAL *pX, REAL *pPr, bOOL *pPrExist);
+
+\n
+  $(module)_OP_parameters m_$(module)OP;
+
+  void KIP_API_TYPE PutCondCur(PotNet  **pPhiNets, REAL**,int32 *pNets, ModControlOption *pModControlOption,SubArr &amp;subArr,bOOL);
+  void KIP_API_TYPE PutCondCurRHS(PotNet  **pPhiNets, REAL**,int32 *pNets, ModControlOption *pModControlOption,SubArr &amp;subArr,bOOL);
+  void KIP_API_TYPE PutCondCurAC(int32 *pNets,int32 nameACnet,bOOL NoiseOn,SubArr &amp;subArr);
+  void KIP_API_TYPE PutCurrentsAC(PotNet  *pRePhi, PotNet *pImPhi);
+
+  <admst:text format="\n"/>
+  <admst:for-each select="node[location='external']">
+    <admst:text format="  int32 %(name);\n"/>
+  </admst:for-each>
+  <admst:for-each select="node[location='internal']">
+    <admst:text format="  int32 %(name);\n"/>
+  </admst:for-each>
+
+  <admst:variable name="absdelayexist" select="no"/>
+  <admst:for-each select="$spec_func_list/item[name='absdelay']">
+    <admst:variable name="absdelayexist" select="yes"/>
+    <admst:text format="  CAbsDelay *pAbsDel_%(unique_id);\n"/>
+  </admst:for-each>
+
+  <admst:variable name="transitionexist" select="no"/>
+  <admst:for-each select="$spec_func_list/item[name='transition']">
+    <admst:variable name="transitionexist" select="yes"/>
+    <admst:text format="  CTransition *pTrans_%(unique_id);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='\$random']">
+    <admst:text format="  CRandom *pRand_%(unique_id);\n"/>
+  </admst:for-each>
+
+  <admst:variable name="bound_stepexist" select="no"/>
+  <admst:for-each select="$spec_func_list/item[name='\$bound_step']">
+    <admst:variable name="bound_stepexist" select="yes"/>
+    <admst:text format="  CBoundStep *pBStep_%(unique_id);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='\$table_model' or name='\$table_model_dim_max']">
+    <admst:text format="  CTableModel *pTabMod_%(unique_id);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='\$table_func']">
+    <admst:text format="  CTableBase *pTableB_%(unique_id);\n"/>
+  </admst:for-each>
+
+  <admst:variable name="crossexist" select="no"/>
+  <admst:for-each select="block[name='cross']">
+    <admst:variable name="crossexist" select="yes"/>
+    <admst:value-of select="index(module/block[name='cross'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="  CCross *pCross_$(index);\n"/>
+  </admst:for-each>
+
+  <admst:variable name="timerexist" select="no"/>
+  <admst:for-each select="block[name='timer']">
+    <admst:variable name="timerexist" select="yes"/>
+    <admst:value-of select="index(module/block[name='timer'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="  CTimer *pTimer_$(index);\n"/>
+  </admst:for-each>
+
+  <admst:text format="\n"/>
+  <admst:text format="  int32 index_transition_var_start;\n"/>
+  <admst:text format="  int32 index_slew_var_start;\n"/>
+  <admst:text format="  int32 index_delay_var_start;\n"/>
+  <admst:text format="  int32 index_cross_var_start;\n\n"/>
+
+  <admst:text format="  int32 KIP_API_TYPE GetNumVarRealObjs()\n  {\n"/>
+  <admst:text format="    int32 num = 0;\n"/>
+
+  <admst:count select="variable[(scope='cross_variable' or setininitial_step='yes') and type='real' and sizetype='scalar']"/>
+  <admst:text format="    num += %s;  //  set in cross or in timer or in initial_step variables\n\n"/>
+
+  <admst:text format="    index_transition_var_start = num;\n"/>
+  <admst:count select="$spec_func_list/item[name='transition']"/>
+  <admst:text format="    num += %s;  //  transition functions count\n\n"/>
+
+  <admst:text format="    index_slew_var_start = num;\n"/>
+  <admst:count select="$spec_func_list/item[name='slew']"/>
+  <admst:text format="    num += %s;  //  slew functions count\n\n"/>
+
+  <admst:text format="    index_delay_var_start = num;\n"/>
+  <admst:count select="$spec_func_list/item[name='absdelay']"/>
+  <admst:text format="    num += %s;  //  delay functions count\n\n"/>
+
+  <admst:text format="    index_cross_var_start = num;\n"/>
+  <admst:count select="block[name='cross']"/>
+  <admst:text format="    num += %s;  //  cross blocks\n\n"/>
+
+  <admst:text format="    return num;\n"/>
+  <admst:text format="  }\n\n"/>
+
+  <admst:text format="  int32 KIP_API_TYPE GetNumVarIntObjs()\n  {\n"/>
+  <admst:text format="    int32 num = 0;\n"/>
+  <admst:count select="variable[(scope='cross_variable' or setininitial_step='yes') and type='integer' and sizetype='scalar']"/>
+  <admst:text format="    num += %s;  //  set in cross or in timer or in initial_step variables\n\n"/>
+  <admst:text format="    return num;\n"/>
+  <admst:text format="  }\n\n"/>
+
+  <admst:text format="  int32 KIP_API_TYPE GetNumVarStrObjs()\n  {\n"/>
+  <admst:text format="    int32 num = 0;\n"/>
+  <admst:count select="variable[(scope='cross_variable' or setininitial_step='yes') and type='string' and sizetype='scalar']"/>
+  <admst:text format="    num += %s;  //  set in cross or in timer or in initial_step variables\n\n"/>
+  <admst:text format="    return num;\n"/>
+  <admst:text format="  }\n\n"/>
+
+  <admst:text format="  std::vector&lt;int32&gt; KIP_API_TYPE GetNumVarRealVObjs()\n  {\n"/>
+  <admst:text format="    std::vector&lt;int32&gt; vec;  //  set in cross or in timer or in initial_step variables\n"/>
+  <admst:for-each select="variable[(scope='cross_variable' or setininitial_step='yes') and type='real' and sizetype='array']">
+    <admst:text format="    vec.push_back(%(maxsize)-%(minsize));\n"/>
+  </admst:for-each>
+  <admst:text format="\n"/>
+  <admst:text format="    return vec;\n"/>
+  <admst:text format="  }\n\n"/>
+
+  <admst:text format="  std::vector&lt;int32&gt; KIP_API_TYPE GetNumVarIntVObjs()\n  {\n"/>
+  <admst:text format="    std::vector&lt;int32&gt; vec;  //  set in cross or in timer or in initial_step variables\n"/>
+  <admst:for-each select="variable[(scope='cross_variable' or setininitial_step='yes') and type='integer' and sizetype='array']">
+    <admst:text format="    vec.push_back(%(maxsize)-%(minsize));\n"/>
+  </admst:for-each>
+  <admst:text format="\n"/>
+  <admst:text format="    return vec;\n"/>
+  <admst:text format="  }\n\n"/>
+
+  <admst:text format="  std::vector&lt;int32&gt; KIP_API_TYPE GetNumVarStrVObjs()\n  {\n"/>
+  <admst:text format="    std::vector&lt;int32&gt; vec;  //  set in cross or in timer or in initial_step variables\n"/>
+  <admst:for-each select="variable[(scope='cross_variable' or setininitial_step='yes') and type='string' and sizetype='array']">
+    <admst:text format="    vec.push_back(%(maxsize)-%(minsize));\n"/>
+  </admst:for-each>
+  <admst:text format="\n"/>
+  <admst:text format="    return vec;\n"/>
+  <admst:text format="  }\n\n"/>
+
+  <admst:if test="[$crossexist='yes']">
+
+    <admst:text format="  bOOL KIP_API_TYPE IsLimitTimeStepExist() { return tRUE; }\n" />
+
+    <admst:text format="  bOOL KIP_API_TYPE LimitTimeStep(PotNet **ppPN, REAL PS, REAL *pCS)\n" />
+    <admst:text format="  {\n"/>
+    <admst:text format="    bOOL local_rez = fALSE;\n"/>
+    <admst:text format="    bOOL rez = fALSE;\n"/>
+    <admst:text format="    REAL rezult_step = *pCS;\n"/>
+    <admst:text format="    REAL local_step = *pCS;\n"/>
+    <admst:for-each select="block[name='cross']">
+      <admst:value-of select="index(module/block[name='cross'],.)"/>
+      <admst:variable name="index" select="%s"/>
+      <admst:text format="\n    local_rez = pCross_$(index)->LimitTimeStep(ppPN, PS, &amp;local_step, index_cross_var_start+$index);  // cross\n"/>
+      <admst:text format="    if(local_rez &amp;&amp; local_step &lt; rezult_step) { rezult_step = local_step; rez = local_rez; };\n"/>
+    </admst:for-each>
+    <admst:text format="    *pCS = rezult_step;\n"/>
+    <admst:text format="    return rez;\n"/>
+    <admst:text format="  }\n"/>
+
+  </admst:if>
+
+  <admst:if test="[$absdelayexist='yes' or $transitionexist='yes' or $bound_stepexist='yes' or $timerexist='yes']">
+
+    <admst:text format="  bOOL KIP_API_TYPE NeedGetNextSeparPoint() { return tRUE; }\n" />
+
+    <admst:text format="  bOOL KIP_API_TYPE GetNextSeparPoint(REAL time,REAL *SepPoint,REAL*,PotNet**)\n" />
+    <admst:text format="  {\n"/>
+    <admst:text format="    bOOL local_rez = fALSE;\n"/>
+    <admst:text format="    bOOL rez = fALSE;\n"/>
+    <admst:text format="    REAL rezult_seppoint = pTypeModInfo->pKipModsServ->GetDynEndTime();\n"/>
+    <admst:text format="    REAL local_seppoint = *SepPoint;\n"/>
+    <admst:for-each select="$spec_func_list/item[name='transition']">
+      <admst:text format="\n    local_rez = pTrans_%(unique_id)->GetNextSeparPoint(time, &amp;local_seppoint);  // transition\n"/>
+      <admst:text format="    if(local_seppoint &lt; rezult_seppoint) { rezult_seppoint = local_seppoint; rez = local_rez; };\n"/>
+    </admst:for-each>
+    <admst:for-each select="$spec_func_list/item[name='\$bound_step']">
+      <admst:text format="\n    local_rez = pBStep_%(unique_id)->GetNextSeparPoint(time, &amp;local_seppoint);  // bound_step\n"/>
+      <admst:text format="    if(local_seppoint &lt; rezult_seppoint) { rezult_seppoint = local_seppoint; rez = local_rez; };\n"/>
+    </admst:for-each>
+    <admst:for-each select="$spec_func_list/item[name='absdelay']">
+      <admst:text format="\n    local_rez = pAbsDel_%(unique_id)->GetNextSeparPoint(time, &amp;local_seppoint);  // absdelay\n"/>
+      <admst:text format="    if(local_seppoint &lt; rezult_seppoint) { rezult_seppoint = local_seppoint; rez = local_rez; };\n"/>
+    </admst:for-each>
+    <admst:for-each select="block[name='timer']">
+      <admst:value-of select="index(module/block[name='timer'],.)"/>
+      <admst:variable name="index" select="%s"/>
+      <admst:text format="\n    local_rez = pTimer_$(index)->GetNextSeparPoint(time, &amp;local_seppoint);  // timer\n"/>
+      <admst:text format="    if(local_seppoint &lt; rezult_seppoint) { rezult_seppoint = local_seppoint; rez = local_rez; };\n"/>
+    </admst:for-each>
+    <admst:text format="    *SepPoint = rezult_seppoint;\n"/>
+    <admst:text format="    return rez;\n"/>
+    <admst:text format="  }\n"/>
+
+    <admst:if test="[$absdelayexist='yes' or $transitionexist='yes']">
+      <admst:text format="  bOOL KIP_API_TYPE NeedModStepSimedNotify() { return tRUE; }\n" />
+
+      <admst:text format="  void KIP_API_TYPE ModStepSimedNotify(ModControlOption *pModControlOption)\n" />
+      <admst:text format="  {\n"/>
+      <admst:for-each select="$spec_func_list/item[name='transition']">
+        <admst:text format="    pTrans_%(unique_id)->SaveValues(index_transition_var_start+%(position(.)-1));  // transition\n"/>
+      </admst:for-each>
+      <admst:for-each select="$spec_func_list/item[name='absdelay']">
+        <admst:text format="    pAbsDel_%(unique_id)->SaveValues(index_delay_var_start+%(position(.)-1);  // absdelay\n"/>
+      </admst:for-each>
+      <admst:text format="  }\n"/>
+    </admst:if>
+
+  </admst:if>
+
+  <admst:text format="\n"/>
+
+  <admst:for-each select="contribution/rhs/function[name='white_noise']">
+    <admst:text format="  REAL %(../../lhs/branch/pnode/name)_%(../../lhs/branch/nnode/name)_wn%(position(.));\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="contribution/rhs/function[name='flicker_noise']">
+    <admst:text format="  REAL %(../../lhs/branch/pnode/name)_%(../../lhs/branch/nnode/name)_fn%(position(.))_pwr;\n"/>
+    <admst:text format="  REAL %(../../lhs/branch/pnode/name)_%(../../lhs/branch/nnode/name)_fn%(position(.))_a;\n"/>
+  </admst:for-each>
+
+  <admst:text format="\n"/>
+  <admst:apply-templates select="." match="InitContributionBranchProcessed"/>
+  <admst:apply-templates select="." match="module:contribution:declaration">
+    <admst:text format="%(returned('x')/value)"/>
+  </admst:apply-templates>
+
+  int32 KIP_API_TYPE InitParameters(CParError *pParErrRet)
+  {
+    return $(module)Par->CreatePar(this,pParErrRet);
+  }
+
+  int32 KIP_API_TYPE InitParametersNC()
+  {\n
+  <admst:for-each select="$spec_func_list/item[name='absdelay']">
+    <admst:text format="    if(pAbsDel_%(unique_id)) delete pAbsDel_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='transition']">
+    <admst:text format="    if(pTrans_%(unique_id)) delete pTrans_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='\$random']">
+    <admst:text format="    if(pRand_%(unique_id)) delete pRand_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='\$bound_step']">
+    <admst:text format="    if(pBStep_%(unique_id)) delete pBStep_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="$spec_func_list/item[name='\$table_model' or name='\$table_model_dim_max']">
+    <admst:text format="    if(pTabMod_%(unique_id)) delete pTabMod_%(unique_id);\n"/>
+  </admst:for-each>
+  <admst:for-each select="block[name='cross']">
+    <admst:value-of select="index(module/block[name='cross'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="    if(pCross_$(index)) delete pCross_$(index);\n"/>
+  </admst:for-each>
+  <admst:for-each select="block[name='timer']">
+    <admst:value-of select="index(module/block[name='timer'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="    if(pTimer_$(index)) delete pTimer_$(index);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='absdelay']">
+    <admst:apply-templates select="arguments[2]" match="subexpression:process">
+      <admst:text format="    pAbsDel_%(../unique_id) = new CAbsDelay(this, %(returned('x')/value));\n"/>
+    </admst:apply-templates>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='transition']">
+
+    <admst:apply-templates select="arguments[4]" match="subexpression:process">
+      <admst:value-of select="returned('x')/value"/>
+    </admst:apply-templates>
+
+    <admst:apply-templates select="arguments[3]" match="subexpression:process">
+      <admst:value-of select="returned('x')/value"/>
+    </admst:apply-templates>
+
+    <admst:apply-templates select="arguments[2]" match="subexpression:process">
+      <admst:value-of select="returned('x')/value"/>
+    </admst:apply-templates>
+
+    <admst:choose>
+      <admst:when test="arguments[position(.)=4]">
+        <admst:text format="    pTrans_%(unique_id) = new CTransition(this, %s, %s, %s);\n"/>
+      </admst:when>
+      <admst:otherwise>
+        <admst:choose>
+          <admst:when test="arguments[position(.)=3]">
+            <admst:text format="    pTrans_%(unique_id) = new CTransition(this, %s, %s);\n"/>
+          </admst:when>
+          <admst:otherwise>
+            <admst:if test="arguments[position(.)=2]">
+              <admst:text format="    pTrans_%(unique_id) = new CTransition(this, %s, 0.0);\n"/>
+            </admst:if>
+          </admst:otherwise>
+        </admst:choose>
+      </admst:otherwise>
+    </admst:choose>
+
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='\$random']">
+    <admst:text format="    pRand_%(unique_id) = new CRandom(this);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='\$bound_step']">
+    <admst:text format="    pBStep_%(unique_id) = new CBoundStep(this);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='\$table_model' or name='\$table_model_dim_max']">
+    <admst:text format="    pTabMod_%(unique_id) = new CTableModel(this);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="block[name='cross']">
+    <admst:value-of select="index(module/block[name='cross'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="    pCross_$(index) = new CCross(this);\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="block[name='timer']">
+    <admst:value-of select="index(module/block[name='timer'],.)"/>
+    <admst:variable name="index" select="%s"/>
+    <admst:text format="    pTimer_$(index) = new CTimer(this);\n"/>
+  </admst:for-each>
+
+    /* Indexes assignment */\n
+  <admst:text format="    int32 nind = 0;\n"/>
+  <admst:for-each select="node[location='external']">
+    <admst:text format="    %(name) = nind++;\n"/>
+  </admst:for-each>
+  <admst:for-each select="node[location='internal']">
+    <admst:text format="    %(name) = nind++;\n"/>
+  </admst:for-each>
+
+  <admst:text format="\n"/>
+
+  <admst:text format="    SIZE_OF_NODES_$(module) = nind;\n"/>
+
+    /* Need correspond order of binding */
+    CNodeVec2 addrNV;
+  <admst:for-each select="node[location='external']">
+    addrNV.push_back(NVpair(Npair(&amp;%(name),0),CNodeVec()));
+  </admst:for-each>
+  <admst:for-each select="node[location='internal']">
+    addrNV.push_back(NVpair(Npair(&amp;%(name),0),CNodeVec()));
+  </admst:for-each>
+
+  <admst:text format="\n"/>
+
+  <admst:for-each select="conditional[#cond_global_pot_zero_contrib='yes']">
+    <admst:apply-templates select="if/tree" match="subexpression:process">
+      <admst:value-of select="returned('x')/value"/>
+    </admst:apply-templates>
+    <admst:text format="    if(%s)\n    {"/>
+    <admst:apply-templates select="then" match="process_v_zero_contribution"/>
+    <admst:text format="\n    }\n"/>
+    <admst:text format="    else\n    {"/>
+    <admst:apply-templates select="else" match="process_v_zero_contribution"/>
+    <admst:text format="\n    }\n"/>
+  </admst:for-each>
+
+  <admst:for-each select="conditional[#cond_global_idt='yes']">
+    <admst:apply-templates select="if/tree" match="subexpression:process">
+      <admst:value-of select="returned('x')/value"/>
+    </admst:apply-templates>
+    <admst:text format="    if( ! (%s))\n    {"/>
+    <admst:apply-templates select="then" match="process_global_idt"/>
+    <admst:text format="\n    }\n"/>
+    <admst:text format="    else\n    {"/>
+    <admst:apply-templates select="else" match="process_global_idt"/>
+    <admst:text format="\n    }\n"/>
+  </admst:for-each>
+
+    UpdateNodes(addrNV,SIZE_OF_NODES_$(module));
+
+  <admst:template match="process_v_zero_contribution">
+    <admst:choose>
+      <admst:when test="[datatypename='contribution' and #global_pot_zero_contrib='yes']">
+        <admst:choose>
+          <admst:when test="lhs/branch/nnode[grounded='yes']">
+            <admst:if test="[#global_pot_zero_contrib_flow_contributive='1']">
+      addrNV[%(lhs/branch/pnode/name)_flow].second.push_back(%(lhs/branch/pnode/name)_flow);
+            </admst:if>
+      addrNV[%(lhs/branch/pnode/name)].second.push_back(%(lhs/branch/pnode/name));
+          </admst:when>
+          <admst:otherwise>
+            <admst:if test="[#global_pot_zero_contrib_flow_contributive='1']">
+      addrNV[%(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_flow].second.push_back(%(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_flow);
+            </admst:if>
+      addrNV[%(lhs/branch/pnode/name)].second.push_back(%(lhs/branch/nnode/name));
+      addrNV[%(lhs/branch/nnode/name)].second.push_back(%(lhs/branch/pnode/name));
+          </admst:otherwise>
+        </admst:choose>
+      </admst:when>
+      <admst:when test="[datatypename='block']">
+        <admst:apply-templates select="item" match="process_v_zero_contribution"/>
+      </admst:when>
+    </admst:choose>
+  </admst:template>
+
+  <admst:template match="process_global_idt">
+    <admst:choose>
+      <admst:when test="[(datatypename='contribution' or datatypename='assignment')]">
+        <admst:for-each select="rhs/function[#global_idt = 'yes']">
+      addrNV[idt%(unique_id)].second.push_back(idt%(unique_id));
+        </admst:for-each>
+      </admst:when>
+      <admst:when test="[datatypename='block']">
+        <admst:apply-templates select="item" match="process_global_idt"/>
+      </admst:when>
+    </admst:choose>
+  </admst:template>
+
+    return 0;
+  }
+
+  int32 KIP_API_TYPE GetNumQObjs(int32*)
+  {\n
+  <admst:text format="    CIntArr SourDtNets;\n"/>
+  <admst:text format="    InitSourDtNets(&amp;SourDtNets);\n"/>
+  <admst:text format="    CompressSourDtNets(&amp;SourDtNets);\n"/>
+  <admst:text format="    return SourDtNets.GetSize();"/>
+  }
+
+  int32 KIP_API_TYPE GetModelNumInnerNets()
+  {
+  <admst:count select="node[location='internal' and #extend='yes']"/>
+  <admst:text format="\n    int32 num = SIZE_OF_NODES_$(module)-pModElem->numPin-%s;"/>
+    if(num &lt; 0)  //  Possible if external pin will be eat by another external pin (for example, bsimsoi).
+      num = 0;
+    return num;
+  }
+
+  <admst:if test="$spec_func_list/item[name='\$connect_internal_nodes_to_element']">
+  int32 KIP_API_TYPE InitExtendNodes();
+  bOOL KIP_API_TYPE IsExtendNetsChanged();
+  </admst:if>
+
+  bOOL KIP_API_TYPE IsModPinLinksExist() { return tRUE; }
+  void KIP_API_TYPE FillModPinLinks();
+
+  <admst:if test="node/attribute[name='curstream' and value='yes']">
+  void KIP_API_TYPE GetModIndCurStream(CIntArr *pNArr)
+  {
+    <admst:text format="\n"/>
+    <admst:for-each select="node/attribute[name='curstream' and value='yes']">
+      <admst:text format="    pNArr->Add(%(../name));\n"/>
+    </admst:for-each>
+  }
+  </admst:if>
+
+  void KIP_API_TYPE GetCurrentsNoise(PotNet *pRePhi, PotNet *pImPhi, REAL *pNoiseToks);
+  int32 KIP_API_TYPE GetNoiseSourceNum();
+  int32 KIP_API_TYPE GetNoiseSourceInfo(int32 *pNodesInds,int32 *pNodesZs,int32 *pOutSourceInds);
+
+  REAL KIP_API_TYPE GetInternalModelInfo(ModInfType mit,int32 mit_ind,PotNet ** /*pPhiNets*/);
+
+  <admst:text format="\n"/>
+  <admst:for-each select="contribution[#global_pot_zero_contrib='no']">
+    <admst:text format="  REAL %(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_vpower%(position(.));\n"/>
+    <admst:text format="  REAL %(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_ipower%(position(.));\n"/>
+  </admst:for-each>
+  int32 KIP_API_TYPE GetInternalModelInfoPowerSize();
+  void KIP_API_TYPE GetInternalModelInfoPower(PotNet ** /*pPhiNets*/,REAL *pV,REAL *pI);
+
+  bOOL KIP_API_TYPE IsLimitPhiExist()
+  {
+    bOOL ret = fALSE;\n
+  <admst:if test="node/attribute[name='limtype' and value='limited']">
+    <admst:text format="    ret = tRUE;"/>
+  </admst:if>
+    return ret;
+  }
+  void KIP_API_TYPE LimitingPhi(PotNet **pPhiNets, REAL **pPhi);
+
+  bOOL KIP_API_TYPE IsDirectMAndRFilled() { return tRUE; }
+
+  void KIP_API_TYPE InitMatrInfoArr(CPtrArr *pMIarrArr,CPtrArr *pRarr,int32 Capacity);
+
+  void KIP_API_TYPE InitSourPairNets(CIntArr *pSPNets)
+  {\n
+  <admst:for-each select="contribution[#global_pot_zero_contrib='no']/lhs[nature=discipline/flow]/branch/nnode[grounded='no']">
+
+    <admst:variable name="current_branch" path="../"/>
+    <admst:variable name="added" select="no"/>
+
+    <admst:for-each select="../../probe">
+
+      <admst:if test="[$(added) = 'no' and $(current_branch)/pnode = branch/pnode]">
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/pnode/name));\n"/>
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/nnode/name));\n"/>
+        <admst:variable name="added" select="yes"/>
+      </admst:if>
+      <admst:if test="[$(added) = 'no' and $(current_branch)/pnode = branch/nnode]">
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/pnode/name));\n"/>
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/nnode/name));\n"/>
+        <admst:variable name="added" select="yes"/>
+      </admst:if>
+      <admst:if test="[$(added) = 'no' and $(current_branch)/nnode = branch/pnode]">
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/pnode/name));\n"/>
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/nnode/name));\n"/>
+        <admst:variable name="added" select="yes"/>
+      </admst:if>
+      <admst:if test="[$(added) = 'no' and $(current_branch)/nnode = branch/nnode]">
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/pnode/name));\n"/>
+        <admst:text format="    pSPNets-&gt;Add(%($(current_branch)/nnode/name));\n"/>
+        <admst:variable name="added" select="yes"/>
+      </admst:if>
+
+    </admst:for-each>
+
+  </admst:for-each>
+  }
+
+  <admst:count select="contribution[#global_pot_zero_contrib='no' and #contribution_with_br='1']"/>
+  <admst:variable name="br_count" select="%s"/>
+  <admst:if test="[$(br_count) != '0']">
+  bOOL KIP_API_TYPE IsFlowX()
+  {
+    return tRUE;
+  }
+
+  int32 KIP_API_TYPE GetFlowXNodes(int32 *pNodes, int32 *pNodesBase)
+  {
+    int32 i = 0;\n
+    <admst:for-each select="contribution[#global_pot_zero_contrib='no']">
+
+      <admst:if test="lhs[nature=discipline/potential]">
+
+        <admst:text format="    pNodesBase[i] = -1;\n"/>
+        <admst:text format="    pNodesBase[i+1] = -1;\n"/>
+        <admst:text format="    if(branch_%(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_state == 1)\n    {\n"/>
+        <admst:text format="      pNodesBase[i] = %(lhs/branch/pnode/name);\n"/>
+        <admst:if test="lhs/branch/nnode[grounded='no']">
+          <admst:text format="      pNodesBase[i+1] = %(lhs/branch/nnode/name);\n"/>
+        </admst:if>
+        <admst:text format="    }\n"/>
+
+        <admst:choose>
+          <admst:when test="lhs/branch/nnode[grounded='no']">
+            <admst:text format="    pNodes[i] = %(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_flow - pModElem->numPin;  i++;\n"/>
+            <admst:text format="    pNodes[i] = %(lhs/branch/pnode/name)_%(lhs/branch/nnode/name)_flow - pModElem->numPin;  i++;\n"/>
+          </admst:when>
+          <admst:otherwise>
+            <admst:text format="    pNodes[i] = %(lhs/branch/pnode/name)_flow - pModElem->numPin;  i++;\n"/>
+            <admst:text format="    pNodes[i] = %(lhs/branch/pnode/name)_flow - pModElem->numPin;  i++;\n"/>
+          </admst:otherwise>
+        </admst:choose>
+
+        <admst:text format="\n"/>
+
+      </admst:if>
+
+      <admst:for-each select="rhs/probe[nature=discipline/flow]">
+
+        <admst:if test="[branch/#probe_flow_contributive='0']">
+
+          <admst:text format="    pNodesBase[i] = %(../../lhs/branch/pnode/name);\n"/>
+          <admst:text format="    pNodesBase[i+1] = %(branch/pnode/name)_probe;\n"/>
+
+          <admst:text format="    pNodes[i] = %(branch/pnode/name)_flow - pModElem->numPin;  i++;\n"/>
+          <admst:text format="    pNodes[i] = %(branch/pnode/name)_flow - pModElem->numPin;  i++;\n"/>
+
+          <admst:text format="\n"/>
+
+        </admst:if>
+
+      </admst:for-each>
+
+    </admst:for-each>
+
+    <admst:text format="    return i;"/>
+  }
+  </admst:if>
+
+  <admst:if test="branch/attribute[name='gmin' and value='yes']">
+  void KIP_API_TYPE InitExtGminPairNets(CIntArr *pSPNets)
+  {\n
+    <admst:for-each select="branch/attribute[name='gmin' and value='yes']/../nnode[grounded='no']">
+      <admst:text format="    pSPNets-&gt;Add(%(../pnode/name));\n"/>
+      <admst:text format="    pSPNets-&gt;Add(%(../nnode/name));\n"/>
+    </admst:for-each>
+  }
+  </admst:if>
+
+  void KIP_API_TYPE InitSourDtNets(CIntArr *pDtNets)
+  {\n
+  <admst:for-each select="contribution[#global_pot_zero_contrib='no']/lhs[#ddt_dep='yes']">
+
+    <admst:if test="[nature=discipline/potential]">
+      <admst:choose>
+        <admst:when test="branch/nnode[grounded='no']">
+          <admst:text format="    pDtNets-&gt;Add(%(branch/pnode/name)_%(branch/nnode/name)_flow);\n"/>
+        </admst:when>
+        <admst:otherwise>
+          <admst:text format="    pDtNets-&gt;Add(%(branch/pnode/name)_flow);\n"/>
+        </admst:otherwise>
+      </admst:choose>
+    </admst:if>
+
+    <admst:if test="[nature=discipline/flow]">
+      <admst:text format="    pDtNets-&gt;Add(%(branch/pnode/name));\n"/>
+      <admst:if test="branch/nnode[grounded='no']">
+        <admst:text format="    pDtNets-&gt;Add(%(branch/nnode/name));\n"/>
+      </admst:if>
+    </admst:if>
+
+  </admst:for-each>
+
+  <admst:for-each select="$spec_func_list/item[name='idt']">
+    <admst:text format="    pDtNets-&gt;Add(idt%(unique_id));\n"/>
+  </admst:for-each>
+  }
+
+  <admst:if test="block[name='final_step']">
+  bOOL KIP_API_TYPE IsFinalStepExist() { return tRUE; }
+  </admst:if>
+
+  /* analog function section */
+  int32 some_dummy_var;
+
+  <admst:for-each select="analogfunction">
+
+    <admst:variable name="gaf_input_vars" path="variable[input='yes']"/>
+
+    <admst:text format="  "/>
+    <admst:if test="[type='real']"> <admst:text format="REAL "/> </admst:if>
+    <admst:if test="[type='integer']"> <admst:text format="ptrdiff_t "/> </admst:if>
+    <admst:text format="_%(name)("/>
+    <admst:for-each select="$gaf_input_vars">
+      <admst:apply-templates select="." match="dectype"/>
+      <admst:text format="%(name), "/>
+    </admst:for-each>
+    <admst:text format="int32 some_dummy_var=1);\n"/>
+
+    <admst:text format="  REAL _d_%(name)("/>
+    <admst:for-each select="$gaf_input_vars">
+      <admst:apply-templates select="." match="dectype"/>
+      <admst:text format="%(name), "/>
+    </admst:for-each>
+    <admst:for-each select="$gaf_input_vars">
+      <admst:text format="REAL &amp;_%(../name)_%(name), "/>
+    </admst:for-each>
+    <admst:text format="int32 some_dummy_var=1);\n"/>
+
+    <admst:text format="\n"/>
+
+  </admst:for-each>
+};
+
+#ifdef EPSOX
+#undef EPSOX
+#endif
+
+#endif // _$(module)_H
+
+</admst:template>
+
+<admst:for-each select="/module">
+
+  <admst:new datatype="list" arguments="">
+    <admst:variable name="spec_func_list" select="%(.)"/>
+  </admst:new>
+  <admst:apply-templates select="analog/code/item" match="SpecialFuncCollect"/>
+  <admst:apply-templates select="." match="InitNodesExtend"/>
+  <admst:new datatype="list" arguments="">
+    <admst:variable name="ddt_by_uniq_name" select="%(.)"/>
+  </admst:new>
+  <admst:for-each select="$spec_func_list/item[name='ddt']">
+    <admst:push into="$ddt_by_uniq_name/item" select="arguments[1]" onduplicate="ignore"/>
+  </admst:for-each>
+  <admst:new datatype="list" arguments="">
+    <admst:variable name="idt_by_uniq_name" select="%(.)"/>
+  </admst:new>
+  <admst:for-each select="$spec_func_list/item[name='idt']">
+    <admst:push into="$idt_by_uniq_name/item" select="arguments[1]" onduplicate="ignore"/>
+  </admst:for-each>
+
+  <admst:new datatype="list" arguments="bpl">
+    <admst:variable name="branch_processed_list" select="%(.)"/>
+  </admst:new>
+
+  <admst:new datatype="list" arguments="mal">
+    <admst:variable name="MatrAddrsList" select="%(.)"/>
+  </admst:new>
+
+  <admst:new datatype="list" arguments="svl">
+    <admst:variable name="SpecVarsRealList" select="%(.)"/>
+  </admst:new>
+  <admst:new datatype="list" arguments="svl">
+    <admst:variable name="SpecVarsIntList" select="%(.)"/>
+  </admst:new>
+  <admst:new datatype="list" arguments="svl">
+    <admst:variable name="SpecVarsStrList" select="%(.)"/>
+  </admst:new>
+  <admst:new datatype="list" arguments="svl">
+    <admst:variable name="SpecVarsRealVList" select="%(.)"/>
+  </admst:new>
+  <admst:new datatype="list" arguments="svl">
+    <admst:variable name="SpecVarsIntVList" select="%(.)"/>
+  </admst:new>
+  <admst:new datatype="list" arguments="svl">
+    <admst:variable name="SpecVarsStrVList" select="%(.)"/>
+  </admst:new>
+  <admst:apply-templates select="variable" match="InitSVL"/>
+
+  <admst:open file="%(name).h">
+
+    <admst:text format="/* ---------------------------------\n"/>
+    <admst:text format="   created automatically. Do not change!\n"/>
+    <admst:text format="   Interface: %(/simulator/package_string)\n"/>
+    <admst:text format="   created by: %(/simulator/fullname) - %(/simulator/currentdate)\n"/>
+    <admst:text format="   ---------------------------------*/\n\n"/>
+    <admst:variable name="module" path="name"/>
+
+    <admst:text format="#ifndef  _$(module)_H\n"/>
+    <admst:text format="#define  _$(module)_H\n"/>
+    <admst:text format="#include &lt;cstddef&gt;\n"/>
+    <admst:text format="#include &lt;cstdio&gt;\n"/>
+    <admst:text format="#include &lt;limits&gt;\n"/>
+    <admst:text format="#include &quot;kiparis/kipmodels.h&quot;\n\n"/>
+
+    <admst:apply-templates select="." match="code"/>
+
+  </admst:open>
+
+  <admst:message format="%(name).h: file created\n"/>
+
+</admst:for-each>
+
+</admst>

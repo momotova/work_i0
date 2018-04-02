@@ -1,0 +1,16 @@
+current directory: /home/olya/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.4.2/ext/wrapper_installer
+/home/olya/.rvm/rubies/ruby-2.5.0/bin/ruby -r ./siteconf20180312-28677-o64sud.rb extconf.rb
+rake 12.3.0
+rdoc 6.0.1
+
+current directory: /home/olya/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.4.2/ext/wrapper_installer
+make "DESTDIR=" clean
+make: *** No rule to make target 'clean'.  Stop.
+
+current directory: /home/olya/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.4.2/ext/wrapper_installer
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/olya/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.4.2/ext/wrapper_installer
+make "DESTDIR=" install
+make: Nothing to be done for 'install'.

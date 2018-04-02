@@ -1,0 +1,41 @@
+
+`include "constants.h"
+`include "discipline.h"
+
+module c_var (n1, n2, n3, n4 );
+electrical n1, n2, n3, n4 ;
+inout n1, n2, n3, n4;
+
+parameter real ac1=1;
+parameter real ac2=1;
+parameter real bc1=1;
+parameter real bc2=1;
+parameter real cc1=1;
+parameter real cc2=1;
+parameter real dc1=1;
+parameter real dc2=1;
+parameter real ec1=1;
+parameter real ec2=1;
+parameter real fc1=1;
+parameter real fc2=1;
+parameter real c0=1;
+parameter real rp=1; 
+
+real c;
+
+analog begin
+    if ( V(n1,n2) >= 0 ) begin
+      c=c0+V(n1,n2)*(ac1+bc1*V(n1,n2)+cc1*V(n1,n2)*V(n1,n2)+dc1*V(n1,n2)*V(n1,n2)*V(n1,n2)
++     +ec1*V(n1,n2)*V(n1,n2)*V(n1,n2)*V(n1,n2) 
++     +fc1*V(n1,n2)*V(n1,n2)*V(n1,n2)*V(n1,n2)*V(n1,n2));
+        end    else    begin
+      c=c0+V(n1,n2)*(ac2+bc2*V(n1,n2)+cc2*V(n1,n2)*V(n1,n2)+dc2*V(n1,n2)*V(n1,n2)*V(n1,n2)
++     +ec2*V(n1,n2)*V(n1,n2)*V(n1,n2)*V(n1,n2)
++     +fc2*V(n1,n2)*V(n1,n2)*V(n1,n2)*V(n1,n2)*V(n1,n2));
+        end
+I(n3,n4) <+ V(n3,n4)/rp; 
+I(n3,n4) <+ ddt(c*V(n3,n4));
+
+end
+
+endmodule

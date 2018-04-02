@@ -1,0 +1,7 @@
+
+V1 1 0 PULSE 0 5 0n 2n 2n 20n 40n
+R1 1 2 1k
+C1 2 0 1p
+.tran 1n 100n
+.end
+

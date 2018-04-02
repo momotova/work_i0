@@ -1,0 +1,11 @@
+
+simulator lang=spectre
+
+acsweep ac start=1.000000e+001 stop=1.000000e+009 dec=1.000000e+001 
+
+save port_out_2 
+
+saveoptions options save=all currents=all  redundant_currents=yes rawfmt=apb
+
+default_options options tnom=2.700000e+001 temp=2.700000e+001  
+

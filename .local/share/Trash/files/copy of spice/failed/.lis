@@ -1,0 +1,19 @@
+
+***** SymSpice --- v2.4.0.0527 *****
+
+Job started at	19.49.38   06/10/2017.
+
+Loading file: '/home/student/bin/SYMICA/share/symica/spice.ini'. Please wait...                                                                      (19:49:38)
+
+Netlist summary (root)                                              (19:49:38)
+
+  Nodes   	1
+  Elements	0
+
+Nothing to simulate
+  __error__: parsing of input file failed
+
+Job ended at	19.49.38   06/10/2017.
+
+Job time summary:
+Total time used = 0s  (CPU time 0.303s)

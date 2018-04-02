@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE admst SYSTEM "admst.dtd">
+<admst version="2.2.9" xmlns:admst="http://mot-adms.sourceforge.net/xml-files/admst">
+
+  <admst:open file="%(/basefilename)_noise.cpp">
+    <admst:text format="/* ---------------------------------------------------------------------------\n"/>
+    <admst:text format="   created automatically. Do not change!\n"/>
+    <admst:text format="   Interface: %(/simulator/package_string)\n"/>
+    <admst:text format="   created by: %(/simulator/fullname) - %(/simulator/currentdate)\n"/>
+    <admst:text format="   ---------------------------------------------------------------------------*/\n"/>
+
+    <admst:for-each select="/module">
+#include "%(name).h"
+    </admst:for-each>
+
+    <admst:for-each select="/module">
+      <admst:variable name="module" select="%(name)"/>
+
+void $(module)_Instance::GetCurrentsNoise(PotNet* /*pRePhi*/, PotNet* /*pImPhi*/, REAL *pNoiseToks)
+{
+  CKiparisMods *pKMS = pTypeModInfo->pKipModsServ;
+  int32 Ind = 0;
+
+  REAL acFreq = pKMS->GetACFreq();
+
+  memset(pNoiseToks, 0, sizeof(REAL)*GetNoiseSourceNum());
+      <admst:text format="\n"/>
+      <admst:for-each select="contribution/rhs/function[name='white_noise']">
+        <admst:text format="  pNoiseToks[Ind++] = ( %(../../lhs/branch/pnode/name)_%(../../lhs/branch/nnode/name)_wn%(position(.)) );\n"/>
+      </admst:for-each>
+
+      <admst:for-each select="contribution/rhs/function[name='flicker_noise']">
+        <admst:text format="  pNoiseToks[Ind++] = ( %(../../lhs/branch/pnode/name)_%(../../lhs/branch/nnode/name)_fn%(position(.))_pwr / pow( acFreq, %(../../lhs/branch/pnode/name)_%(../../lhs/branch/nnode/name)_fn%(position(.))_a ) );\n"/>
+      </admst:for-each>
+}
+
+int32 $(module)_Instance::GetNoiseSourceInfo(int32 *pNodesInds,int32 *pNodesZs,int32 *pOutSourceInds)
+{
+  int32 Ind = 0;
+  int32 OSInd = 0;
+
+      <admst:new datatype="list" arguments="">
+        <admst:variable name="noise_outnames_list" select="%(.)"/>
+      </admst:new>
+      <admst:apply-templates select="." match="collect_noise_info"/>
+
+      <admst:apply-templates select="contribution/rhs/function[name='white_noise']" match="noise_indxs"/>
+      <admst:apply-templates select="contribution/rhs/function[name='flicker_noise']" match="noise_indxs"/>
+  return GetNoiseSourceNum();
+}
+
+      <admst:template match="noise_indxs">
+  pNodesInds[Ind] = %(../../lhs/branch/pnode/name);
+        <admst:if test="../../lhs/branch/nnode[grounded='yes']">
+  pNodesInds[Ind+1] = %(../../lhs/branch/pnode/name);
+        </admst:if>
+        <admst:if test="../../lhs/branch/nnode[grounded='no']">
+  pNodesInds[Ind+1] = %(../../lhs/branch/nnode/name);
+        </admst:if>
+  pNodesZs[Ind] = 1;
+        <admst:if test="../../lhs/branch/nnode[grounded='yes']">
+  pNodesZs[Ind+1] = 0;
+        </admst:if>
+        <admst:if test="../../lhs/branch/nnode[grounded='no']">
+  pNodesZs[Ind+1] = -1;
+        </admst:if>
+        <admst:value-of select="#outnoise_index"/>
+  pOutSourceInds[OSInd] = %s;
+  Ind += 2;
+  OSInd += 1;
+
+      </admst:template>
+
+int32 $(module)_Instance::GetNoiseSourceNum()
+{
+      <admst:count select="contribution/rhs/function[name='white_noise' or name='flicker_noise']"/>
+      <admst:text format="\n  return %s;"/>
+}
+
+    </admst:for-each>
+  </admst:open>
+
+  <admst:message format="%(/basefilename)_noise.cpp: file created\n"/>
+
+</admst>
+

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+	<meta charset="UTF-8" />
+	<title>Настройка Jail в FreeBSD с помощью ezjail &#8212; Dreamcatcher.ru</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="stylesheet" href="http://dreamcatcher.ru/wp-content/themes/simplish/style.css" type="text/css" media="all" title="Simplish" />
+	<link rel="pingback" href="http://dreamcatcher.ru/xmlrpc.php" />
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Dreamcatcher.ru &raquo; Лента" href="http://dreamcatcher.ru/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Dreamcatcher.ru &raquo; Лента комментариев" href="http://dreamcatcher.ru/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Dreamcatcher.ru &raquo; Лента комментариев к &laquo;Настройка Jail в FreeBSD с помощью ezjail&raquo;" href="http://dreamcatcher.ru/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/dreamcatcher.ru\/wp-includes\/js\/wp-emoji-release.min.js?ver=3b2fd198d8e87d59200c23368d2360ca"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://dreamcatcher.ru/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://dreamcatcher.ru/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://dreamcatcher.ru/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://dreamcatcher.ru/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://dreamcatcher.ru/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Аутентификация на SSH сервере с использованием ssh-agent' href='http://dreamcatcher.ru/2009/11/30/%d0%90%d1%83%d1%82%d0%b5%d0%bd%d1%82%d0%b8%d1%84%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-%d0%bd%d0%b0-ssh-%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80%d0%b5/' />
+<link rel='next' title='Использование Hierarchical Fair Service Curve (HFSC) в OpenBSD' href='http://dreamcatcher.ru/2009/11/30/%d0%98%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-hierarchical-fair-service-curve-hfsc-%d0%b2-openbsd/' />
+
+<link rel="canonical" href="http://dreamcatcher.ru/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/" />
+<link rel='shortlink' href='http://dreamcatcher.ru/?p=89' />
+<link rel="alternate" type="application/json+oembed" href="http://dreamcatcher.ru/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fdreamcatcher.ru%2F2009%2F11%2F30%2F%25d0%259d%25d0%25b0%25d1%2581%25d1%2582%25d1%2580%25d0%25be%25d0%25b9%25d0%25ba%25d0%25b0-jail-%25d0%25b2-freebsd-%25d1%2581-%25d0%25bf%25d0%25be%25d0%25bc%25d0%25be%25d1%2589%25d1%258c%25d1%258e-ezjail%2F" />
+<script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//dreamcatcher.ru/?wordfence_lh=1&hid=2EC12C9745D3E357F633388C7E9F2C75');
+</script><!-- <meta name="NextGEN" version="2.2.30" /> -->
+<link id='MediaRSS' rel='alternate' type='application/rss+xml' title='NextGEN Gallery RSS Feed' href='http://dreamcatcher.ru/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ngglegacy/xml/media-rss.php' />
+<script type="text/javascript" src="http://dreamcatcher.ru/wp-content/plugins/si-captcha-for-wordpress/captcha/si_captcha.js?ver=1522533329"></script>
+<!-- begin SI CAPTCHA Anti-Spam - login/register form style -->
+<style type="text/css">
+.si_captcha_small { width:175px; height:45px; padding-top:10px; padding-bottom:10px; }
+.si_captcha_large { width:250px; height:60px; padding-top:10px; padding-bottom:10px; }
+img#si_image_com { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_reg { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_log { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_side_login { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_checkout { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_jetpack { border-style:none; margin:0; padding-right:5px; float:left; }
+img#si_image_bbpress_topic { border-style:none; margin:0; padding-right:5px; float:left; }
+.si_captcha_refresh { border-style:none; margin:0; vertical-align:bottom; }
+div#si_captcha_input { display:block; padding-top:15px; padding-bottom:5px; }
+label#si_captcha_code_label { margin:0; }
+input#si_captcha_code_input { width:65px; }
+p#si_captcha_code_p { clear: left; padding-top:10px; }
+.si-captcha-jetpack-error { color:#DC3232; }
+</style>
+<!-- end SI CAPTCHA Anti-Spam - login/register form style -->
+		<style type="text/css">
+		#header{
+			background: url(http://dreamcatcher.ru/wp-content/uploads/2011/05/butt.png);
+		}
+		/* Must spec <a> or else style.css is more specific & wins. */
+				#header a:link, #header a:visited, #header h1, #header h2{
+					color: #005C9E
+				}		</style>
+	
+</head>
+
+<body class="post-template-default single single-post postid-89 single-format-standard">
+<div id="container">
+	<div id="header" role="banner">
+		<h1><span><a href="http://dreamcatcher.ru" rel="home">Dreamcatcher.ru</a></span></h1>
+		<h2></h2>
+	</div>
+	<div id="content-wrapper">
+<!-- goto ^(archive image index page search single ...).php:/^div#content -->
+
+		<div id="content" role="main">
+
+
+			<div id="article-89" class="post-89 post type-post status-publish format-standard hentry category-bsd">
+				<h2 class="entry-title"><a href="http://dreamcatcher.ru/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/" rel="bookmark">Настройка Jail в FreeBSD с помощью ezjail</a></h2>
+<div class="posted">Опубликовано <span class="entry-author author vcard"><a class="url fn" href="http://dreamcatcher.ru/author/admin/" title="Больше постов от Mixa">Mixa</a></span><abbr class="published posted_date" title="2009-11-30T16:28:19+00:00"> &ndash; 30.11.2009</abbr>
+				</div>
+				<br class="clear" />	
+				<div class="entry-content">
+					<p>Перевод: <a href="http://dreamcatcher.ru">Сгибнев Михаил</a><br />
+Оригинал: <a href="http://www.cyberciti.biz/faq/howto-setup-freebsd-jail-with-ezjail/">Setup FreeBSD Jail With ezjail</a></p>
+<p>&nbsp;Зададимся вопросом &#8212; как, используя сервер на базе FreeBSD, получить несколько независимых окружений, в народе называемых jail? Например, как использовать одну из jail для почтового сервера, а вторую для web-сервера, при этом каждая jail должна иметь собственный IP-адрес?<br />
+<span id="more-89"></span><br />
+&nbsp;Каждая jail на FreeBSD имеет собственные файлы, процессы и учетные записи. Находясь внутри, практически невозможно отличить jail от реальной системы. Самым простым способом определения, создания и модифицирования jail является использование среды ezjail.</p>
+<p>&nbsp;Внимание! Сетевые демоны, перед использованием jail, должны быть сконфигурированы на использование адреса 127.0.0.1 или на работу с адресом интерфейса. По крайней мере, это необходимо сделать со службами sshd и syslogd. </p>
+<p>&nbsp;<strong>Вводные данные</strong></p>
+<ul>
+<li>server.nixcraft.net.in : FreeBSD host server running v7.2 with 202.54.1.2</li>
+<li>smtpd.nixcraft.net.in : Mail server jail with 202.54.1.3</li>
+<li>httpd.nixcraft.net.in : Web server jail with 202.54.1.4</li>
+</ul>
+<p>&nbsp;<strong>Шаг 1: Обновляем корневую систему</strong></p>
+<p>&nbsp;Убедитесь в том, что ваша система достаточно актуальна. Руководство по обновлению системы вы можете найти <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/updating-upgrading.html">здесь</a>.<br />
+<!-- Google Adsense --></p>
+<p><center><br />
+[ad name=&#187;Google Adsense&#187;]</p>
+<p></center><br />
+<!-- Google Adsense --><br />
+&nbsp;<strong>Шаг 2: Устанавливаем ezjail</strong></p>
+<p>&nbsp;Для установки ezjail выполните нижеприведенные команды. Таким образом, мы получим два скрипта, позволяющие нам более просто управлять жизненным циклом jail.<br />
+<code><br />
+# cd /usr/ports/sysutils/ezjail<br />
+# make install clean<br />
+</code><br />
+&nbsp;Расположение файлов ezjail по умолчанию:</p>
+<ol>
+<li><strong>/usr/jails/</strong> каталог размещения шаблонов jail. </li>
+<li><strong>/usr/jails/flavours/</strong> настройка каждой jail может быть выполнена через flavours.<br />
+Служит для того чтобы, например, добавить значение по умолчанию в файл /etc/resolv.conf или обновить существующий файл /etc/make.conf</li>
+<li><strong>/usr/jails/basejail/</strong> базовая система jail, которая монтируется в режиме &#171;read only&#187; и<br />
+является одинаковой для всех jail, что позволяет сэкономить место на жестком диске.</li>
+<li><strong>/usr/local/etc/rc.d/ezjail.sh</strong> скрипты Stop/Start/Restart</li>
+<li><strong>/usr/local/etc/ezjail.conf</strong> конфигурационный файл ezjail, который содержит настройки для rc скрипта. Таже данный файл может быть просмотрен<br />
+командой ezjail-admin.</li>
+<li><strong>/usr/local/etc/ezjail/</strong> все файлы конфигурации ваших jail хранятся здесь</li>
+</ol>
+<p>&nbsp;<strong>Шаг 3: Создаем базовый шаблон jail</strong></p>
+<p>&nbsp;Для создания или обновления окружения ezjail (aka basejail) из исходных текстов, выполните следующую команду:<br />
+<code><br />
+# ezjail-admin update -p -i<br />
+</code><br />
+&nbsp;Где:</p>
+<ul>
+<li>-p : Provide ports for jail.</li>
+<li>-i : не запускать &#171;make world&#187;.</li>
+</ul>
+<p>&nbsp;Если у вас нет <em>/usr/src</em> и вы никогда не запускали <em>make world</em>, вы можете установить шаблон с  ftp сервера,<br />
+используя утилиту ezjail-admin:<br />
+<code><br />
+# ezjail-admin install<br />
+</code><br />
+&nbsp;<strong>Шаг 4: Создаем SMTPD Mail Server Jail</strong></p>
+<p>&nbsp;Для создания jail smtpd.nixcraft.net.in с адресом 202.54.1.3, располагающейся в каталоге /jails/smtpd.nixcraft.net.in, выполните следующую команду:<br />
+<code><br />
+# ezjail-admin create -r /jails/smtpd.nixcraft.net.in smtpd.nixcraft.net.in 202.54.1.3<br />
+</code><br />
+&nbsp;<strong>Обновление файла конфигурации SMTPD Jail</strong></p>
+<p>&nbsp;По умолчанию, файл конфигурации расположен в /usr/local/etc/ezjail/smtpd_nixcraft_net_in. Откройте его и добавьте следующие строки:<br />
+<code><br />
+export jail_smtpd_nixcraft_net_in_hostname="smtpd.nixcraft.net.in"<br />
+export jail_smtpd_nixcraft_net_in_ip="202.54.1.3,10.21.51.12"<br />
+</code><br />
+&nbsp;<strong>Шаг 5: Запускаем сервис jail</strong></p>
+<p>&nbsp;Добавим строку запуска в файл <em>/etc/rc.conf</em>:<br />
+<code><br />
+# echo 'ezjail_enable="YES"' >> /etc/rc.conf<br />
+</code><br />
+&nbsp;После чего можем запустить службу:<br />
+<code><br />
+# /usr/local/etc/rc.d/ezjail.sh start<br />
+</code><br />
+&nbsp;Для управления конкретным jail можно воспользоваться следующими командами:<br />
+<code><br />
+# /usr/local/etc/rc.d/ezjail.sh {start/stop/restart} jail-name<br />
+# /usr/local/etc/rc.d/ezjail.sh start httpd<br />
+# /usr/local/etc/rc.d/ezjail.sh stop smtpd.nixcraft.net.in<br />
+</code><br />
+&nbsp;Просмотреть список jail можно командой:<br />
+<code><br />
+# jls<br />
+</code><br />
+&nbsp;Или, для получения дополнительной информации, воспользуйтесь синтаксисом:<br />
+<code><br />
+# jls -v<br />
+</code><br />
+&nbsp;Дя того, чтобы подключиться к jail, воспользуйтесь командой:<br />
+<code><br />
+# jexec jid csh<br />
+</code><br />
+&nbsp;При этом jid можно получить из вывода команды <strong>jls</strong>. В данном примере мы подключаемся к jail<br />
+smtpd.nixcraft.net.in с jid # 2:<br />
+<code><br />
+# jexec 2 csh<br />
+</code><br />
+&nbsp;После подключения к jail мы можем устанавливать необходимое нам ПО, например bash:<br />
+<code><br />
+# pkg_add -r -v bash<br />
+</code><br />
+&nbsp;Или сервер  Apache 2.2:<br />
+<code><br />
+# cd /usr/ports/www/apache22<br />
+# make install clean<br />
+</code><br />
+&nbsp;Для того, чтобы подключаться к jail удаленно, необходимо внести следующие изменения в ее файл <em>/etc/rc.conf</em>:<br />
+<code><br />
+# echo 'sshd_enable="YES"' >> /etc/rc.conf<br />
+</code><br />
+&nbsp;Затем откроем файл <em>sshd_config</em> и укажем в нем использовать только IP адрес, назначенный данной jail.<br />
+После чего запускаем сервер  OpenSSH:<br />
+<code><br />
+# /etc/rc.d/sshd start<br />
+# sockstat -4<br />
+</code><br />
+&nbsp;Обновить FreeBSD Jail можно так:<br />
+<code><br />
+# /usr/local/etc/rc.d/ezjail.sh stop<br />
+# ezjail-admin update -p -i<br />
+# /usr/local/etc/rc.d/ezjail.sh start<br />
+</code><br />
+&nbsp;Для обновления дерева портов используйте команду:<br />
+<code><br />
+# ezjail-admin update -P<br />
+</code><br />
+&nbsp;Журнальные файлы jail по умолчанию хранятся в каталоге <em>/var/log</em>.<br />
+Для того чтобы, к примеру, просмотреть логи jail smtpd.nixcraft.net.in, воспользуйтесь командой:<br />
+<code><br />
+# tail -f jail_smtpd_nixcraft_net_in_console.log<br />
+# grep 'error' jail_smtpd_nixcraft_net_in_console.log<br />
+</code><br />
+&nbsp;Для добавления httpd jail выполните следующие действия:<br />
+<code><br />
+# ezjail-admin create -r /jails/httpd.nixcraft.net.in httpd.nixcraft.net.in 202.54.1.4<br />
+# vi /usr/local/etc/ezjail/httpd_nixcraft_net_in<br />
+# /usr/local/etc/rc.d/ezjail.sh start httpd.nixcraft.net.in<br />
+# jls -v<br />
+# jexec id csh<br />
+</code><br />
+&nbsp;Для резервного копированя jail рекомендую воспользоваться командами<br />
+<a href="http://www.cyberciti.biz/faq/linux-tape-backup-with-mt-and-tar-command-howto/">tar</a>,<br />
+<a href="http://www.cyberciti.biz/faq/use-rsync-to-backup-directory/">rsync</a> и<br />
+<a href="http://bash.cyberciti.biz/backup/freebsd-dump-filesystem-shell-script/">dump</a>.</p>
+<p>&nbsp;Для сохранения данных на ленту, воспользуйтесь командой:<br />
+<code><br />
+# tar -zcvf /dev/sa0 /jails/smtpd.nixcraft.net.in<br />
+</code><br />
+&nbsp;Для сохранения всех jail, расположенных в каталоге <em>/jails</em> используйте:<br />
+<code><br />
+# /sbin/dump -0uLf /dev/sa0 /jails/<br />
+</code><br />
+&nbsp;А для инкрементных обновлений полученного архива:<br />
+<code><br />
+# /sbin/dump -1uLf /dev/sa0 /jails/<br />
+</code><br />
+Используемая литература: </p>
+<p>&nbsp;Раздел <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/jails.html" target="_blank">FreeBSD Jail </a> FreeBSD handbook.<br />
+man jexec, jls, jail, dump, restore</p>
+<p>
+&nbsp;Уважайте труд автора и переводчика, не ищите дешевой славы &#8212; оставляйте ссылки и копирайты при размещении статьи на своем ресурсе!</p>
+<p>&nbsp;Реклама на сайте висит не просто так! Спасибо!<br />
+<!-- Google Adsense --></p>
+<p><center><br />
+[ad name=&#187;Google Adsense&#187;]</p>
+<p></center><br />
+<!-- Google Adsense --></p>
+									</div><!--#entry-content-->
+
+				<ul class="meta">
+					<li class="categories">Категория: <a href="http://dreamcatcher.ru/category/bsd/" rel="category tag">BSD</a></li>
+					<li><a href="http://dreamcatcher.ru/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/#comments" class="comments-link" >Один комментарий</a></li>
+				</ul>
+			</div><!--#hentry-->
+
+		
+			<div id="comments">
+
+
+			<h3 id="comments-title">Один комментарий в <em>Настройка Jail в FreeBSD с помощью ezjail</em></h3>
+
+
+			<ol class="commentlist">
+						<li class="comment even thread-even depth-1" id="comment-210">
+				<div id="div-comment-210" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/7a825869e283f9bee664db0fe6a7b8cb?s=32&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/7a825869e283f9bee664db0fe6a7b8cb?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' />			<cite class="fn"><a href='http://sysadmins.ws' rel='external nofollow' class='url'>Raven</a></cite><span class="says">:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://dreamcatcher.ru/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/#comment-210">
+			14.05.2012 в 15:30</a>		</div>
+
+		<p>Приветствую! Статья в целом неплоха, только вот есть одно но &#8212; в начале путь к папке с тюрьмами обозначен как /usr/jails а в конце /jails. Очевидно в данной статье не изложена та часть, где вносились правки в конфиг ezjail. Очень бы хотелось его обозреть.</p>
+
+		
+				</div>
+		</li><!-- #comment-## -->
+			</ol>
+
+
+
+	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Добавить комментарий <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/#respond" style="display:none;">Отменить ответ</a></small></h3>			<form action="http://dreamcatcher.ru/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">Ваш e-mail не будет опубликован.</span> Обязательные поля помечены <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Комментарий</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">Имя <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">E-mail <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">Сайт</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" /></p>
+
+
+<div class="si_captcha_small"><img id="si_image_com" src="http://dreamcatcher.ru/wp-content/plugins/si-captcha-for-wordpress/captcha/securimage_show.php?si_sm_captcha=1&amp;si_form_id=com&amp;prefix=IG15GQAEcaO8XBRs" width="132" height="45" alt="CAPTCHA" title="CAPTCHA" />
+    <input id="si_code_com" name="si_code_com" type="hidden"  value="IG15GQAEcaO8XBRs" />
+    <div id="si_refresh_com">
+<a href="#" rel="nofollow" title="Обновить" onclick="si_captcha_refresh('si_image_com','com','/wp-content/plugins/si-captcha-for-wordpress/captcha','http://dreamcatcher.ru/wp-content/plugins/si-captcha-for-wordpress/captcha/securimage_show.php?si_sm_captcha=1&amp;si_form_id=com&amp;prefix='); return false;">
+      <img class="si_captcha_refresh" src="http://dreamcatcher.ru/wp-content/plugins/si-captcha-for-wordpress/captcha/images/refresh.png" width="22" height="20" alt="Обновить" onclick="this.blur();" /></a>
+  </div>
+  </div>
+
+<p id="si_captcha_code_p">
+<input id="si_captcha_code" name="si_captcha_code" type="text" />
+<label for="si_captcha_code" >Введите код с картинки (CAPTCHA)</label><span class="required"> *</span>
+</p>
+
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Отправить комментарий" /> <input type='hidden' name='comment_post_ID' value='89' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="2fed3ae99e" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="77"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+
+			<div id="postnav" class="navigation">
+				<div class="prevlink">&laquo; <a href="http://dreamcatcher.ru/2009/11/30/%d0%90%d1%83%d1%82%d0%b5%d0%bd%d1%82%d0%b8%d1%84%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-%d0%bd%d0%b0-ssh-%d1%81%d0%b5%d1%80%d0%b2%d0%b5%d1%80%d0%b5/" rel="prev">Аутентификация на SSH сервере с использованием ssh-agent</a></div>
+				<div class="nextlink"><a href="http://dreamcatcher.ru/2009/11/30/%d0%98%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-hierarchical-fair-service-curve-hfsc-%d0%b2-openbsd/" rel="next">Использование Hierarchical Fair Service Curve (HFSC) в OpenBSD</a> &raquo;</div>
+			</div>
+
+
+		</div><!-- #content -->
+
+		<div id="sidebar" role="complementary">
+			<ul>
+			<li id="search-4" class="widget widget_search"><form role="search" method="get" id="searchform" class="searchform" action="http://dreamcatcher.ru/">
+				<div>
+					<label class="screen-reader-text" for="s">Найти:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Поиск" />
+				</div>
+			</form></li>
+<li id="categories-4" class="widget widget_categories"><h2 class="widgettitle">Рубрики</h2>
+		<ul>
+	<li class="cat-item cat-item-5"><a href="http://dreamcatcher.ru/category/bsd/" >BSD</a> (17)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://dreamcatcher.ru/category/cisco/" >Cisco</a> (15)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://dreamcatcher.ru/category/linux/" >Linux</a> (15)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://dreamcatcher.ru/category/solaris/" >Solaris</a> (2)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://dreamcatcher.ru/category/private/" >Личное</a> (11)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://dreamcatcher.ru/category/misc/" >Разное</a> (6)
+</li>
+		</ul>
+</li>
+<li id="pages-4" class="widget widget_pages"><h2 class="widgettitle">Страницы</h2>
+		<ul>
+			<li class="page_item page-item-423"><a href="http://dreamcatcher.ru/arduscope/">Arduscope</a></li>
+<li class="page_item page-item-564"><a href="http://dreamcatcher.ru/%d0%9c%d0%b5%d0%bb%d0%ba%d0%b8%d0%b5-%d1%81%d0%be%d0%b2%d0%b5%d1%82%d1%8b/">Мелкие советы</a></li>
+<li class="page_item page-item-326"><a href="http://dreamcatcher.ru/%d0%a1%d1%81%d1%8b%d0%bb%d0%ba%d0%b8-%d0%b8-%d0%b4%d0%be%d0%ba%d1%83%d0%bc%d0%b5%d0%bd%d1%82%d0%b0%d1%86%d0%b8%d1%8f/">Ссылки и документация</a></li>
+		</ul>
+		</li>
+<li id="meta-4" class="widget widget_meta"><h2 class="widgettitle">Мета</h2>
+			<ul>
+						<li><a href="http://dreamcatcher.ru/wp-login.php">Войти</a></li>
+			<li><a href="http://dreamcatcher.ru/feed/"><abbr title="Really Simple Syndication">RSS</abbr> записей</a></li>
+			<li><a href="http://dreamcatcher.ru/comments/feed/"><abbr title="Really Simple Syndication">RSS</abbr> комментариев</a></li>
+			<li><a href="https://ru.wordpress.org/" title="Сайт работает на WordPress &#8212; современной персональной платформе для публикаций.">WordPress.org</a></li>			</ul>
+			</li>
+			</ul>
+		</div><!-- #sidebar -->
+
+		<br class="clear" />
+	</div><!--// #content-wrapper -->
+
+	<div id="footer" role="contentinfo">
+	<hr />
+	<p><a href="http://dreamcatcher.ru" rel="home">Dreamcatcher.ru</a></p>
+	<ul>
+		<li><a href="http://wordpress.org" title="WordPress Engine">WordPress</a> | 
+			<span class="vcard">
+				<a class="url fn" rel="follow designer" title="Simplish Style" href="http://simplish.pomfolio.com">Simplish</a> 
+<span class="hidden">от <span class="org">Utopian.net Labs</span></span>
+			</span>
+		</li>
+	</ul>
+	</div><!--// #footer -->
+</div><!--// #container -->
+
+<!-- ngg_resource_manager_marker --><script type='text/javascript' src='http://dreamcatcher.ru/wp-includes/js/wp-embed.min.js?ver=3b2fd198d8e87d59200c23368d2360ca'></script>
+<script async="async" type='text/javascript' src='http://dreamcatcher.ru/wp-content/plugins/akismet/_inc/form.js?ver=4.0.2'></script>
+<script type='text/javascript' src='http://dreamcatcher.ru/wp-content/plugins/si-captcha-for-wordpress/captcha/si_captcha.js?ver=1.0'></script>
+
+</body>
+</html>
+��4MbT      Z��Z��>�4�       �    :http://dreamcatcher.ru/2009/11/30/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-jail-%d0%b2-freebsd-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-ezjail/ strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
+Server: nginx/1.12.2
+Date: Sat, 31 Mar 2018 21:55:29 GMT
+Content-Type: text/html; charset=UTF-8
+X-Powered-By: PHP/5.6.32
+X-Pingback: http://dreamcatcher.ru/xmlrpc.php
+Link: <http://dreamcatcher.ru/wp-json/>; rel="https://api.w.org/", <http://dreamcatcher.ru/?p=89>; rel=shortlink
+ original-response-headers Server: nginx/1.12.2
+Date: Sat, 31 Mar 2018 21:55:29 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Powered-By: PHP/5.6.32
+Set-Cookie: wfvt_3769154505=5ac003d17ab8b; expires=Sat, 31-Mar-2018 22:25:29 GMT; Max-Age=1800; path=/; httponly
+X-Pingback: http://dreamcatcher.ru/xmlrpc.php
+Link: <http://dreamcatcher.ru/wp-json/>; rel="https://api.w.org/"
+Link: <http://dreamcatcher.ru/?p=89>; rel=shortlink
+ uncompressed-len 0 net-response-time-onstart 1347 net-response-time-onstop 1352   x{

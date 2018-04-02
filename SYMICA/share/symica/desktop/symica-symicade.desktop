@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Symica Design Environment
+GenericName=Design Environment
+Comment=The best EDA available!
+TryExec=symicade
+Exec=symicade
+Icon=symica-symicade
+Categories=Education;Engineering;Electronics;

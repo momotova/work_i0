@@ -1,0 +1,665 @@
+/*
+THEME NAME: Simplish
+THEME URI: http://simplish.pomfolio.com
+DESCRIPTION: Simplish is a WordPress variant of the Scribbish theme for blogs.
+TAGS: two-columns, fixed-width, right-sidebar, custom-header, custom-background, custom-menu, threaded-comments, sticky-post, translation-ready, microformats, white, light
+VERSION: 2.6
+AUTHOR: <a href="http://labs.utopian.net">Utopian.net Labs</a>, <a href="http://pittcrew.net/geekblog/">K. Pitt</a>, <a href="http://quotedprintable.com">J. Hardy</a>
+AUTHOR URI:
+LICENSE: GNU General Public License v3.0
+LICENSE URI: http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+/*
+ * Reset. Adapted from Eric Meyer, via CSS Boilerplate.
+ * Uses different bracket/spacing style to ease comparing with source. 
+ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+:focus { outline: 0; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+/*
+ * #container
+ * 	#header
+ * 	#content-wrapper
+ * 		#content
+ * 			#article-n (.hentry)
+ * 				.entry-title
+ * 				.posted
+ * 				.entry-content
+ * 				.meta
+ * 		#sidebar
+ * 	#footer
+ */
+
+body{
+	background: #fff;
+	font: normal .75em "lucida grande", "liberation sans", verdana, arial, helvetica, sans-serif;
+	margin: 0;
+	padding: 0.6em 1em 1em;
+	text-align: center;
+}
+#container{
+	margin: 0 auto;
+	padding: 0;
+	text-align: left;
+	width: 900px;
+}
+#header{
+	border-bottom: 3px solid #ccc;
+	height: 62px;
+	margin: 0 -0.5px 12px 0;
+	padding: 0;
+}
+#content-wrapper{
+	background: #fff;
+}
+#content{
+	float: left;
+	padding: 0 0 0 5px;
+	width: 662px;
+}
+#sidebar{
+	border-left: 1px dotted #ddd;
+	float: right;
+	font-size: .9em;
+	padding-left: 15px;
+	text-align: left;
+	width: 200px;
+}
+#footer{
+	border-top: 1px solid #ccc;
+	clear: both;
+	font-size: 90%;
+	height: 40px;
+	margin: 10px 0 0;
+	padding: 10px 0 0;
+}
+#header a:link, #header a:visited{
+	color:#005C9E;
+	text-decoration: none;
+}
+#header a:hover, #header a:active{
+	background: transparent;
+	color:#760909;
+	text-decoration: none;
+}
+#header h1{
+	float: left;
+	font: bold 410% georgia, constantia, times, serif;
+	letter-spacing: -1px;
+	margin: 0;
+}
+#header h2{
+	float: right;
+	font: normal 1em verdana, calibri, "liberation sans", arial, sans-serif;
+	margin: 2.35em 0.2em 0 0;
+	letter-spacing: normal;
+}
+
+h1, h2, h3, h4, h5{
+	font-family: georgia, constantia, times, serif;
+	font-weight: normal;
+	letter-spacing: -1px;
+}
+h2{
+	font-size: 2em;
+	margin: 0 0 0.3em;
+}
+h3{
+	font-size: 1.6em;
+	margin: 1.2em 0 0.3em;
+}
+h4{
+	font-size: 1.5em;
+	margin: 1.2em 0 0.3em;
+}
+h5{
+	background: #ffd;
+	border-bottom: 1px dotted #aaa;
+	font-size: 1.4em;
+	margin: 1.2em 0 0.3em;
+}
+h1.archive-title{
+	color: #a9a9a9;
+	font-size: 2.3em;
+	margin: 0 0 0.3em;
+}
+h1.archive-title span.archive-subtitle{
+	font-weight: bold;
+}
+.archive-meta{
+	color: #a9a9a9;
+	font-size: 1.4em;
+	margin: 0 6em;
+	text-align: justify;
+}
+.archive-meta .vcard .fn{
+	font-family: georgia, times, serif;
+	font-size: 1.6em;
+	letter-spacing: -1px;
+}
+.archive-meta .vcard img.avatar{
+	border: 1px solid #ddd;
+	clear: both;
+	float: left;
+	margin: 0 8px 0 0;
+}
+.archive-meta .vcard .note{
+	margin: 0 0 0 8px;
+}
+p{
+	margin: 1.2em 0;
+}
+ol, ul{
+	margin-bottom: 1.5em;
+	margin-left: 1em;
+	padding:0;
+}
+ol ol, ol ul, ul ol, ul ul{
+	margin-bottom: 0;
+}
+ol{
+	list-style-type: decimal;
+}
+ul{
+	list-style-type: square;
+}
+li{
+	margin-left: 1em;
+	padding: 0;
+}
+dt{
+	font-weight:bold;
+}
+hr{
+	color: #ffffff;
+	background-color: #ffffff;
+	border-top: 1px dotted #bbbbbb;
+	margin-bottom: 1em;
+}
+blockquote{
+	color: #555;
+	border-left: 5px solid #ccc;
+	margin: 1.3em 1em;
+	padding: 0 1em;
+}
+small{
+	font-size: 70%;
+}
+code{
+	font: normal 1em "bitstream vera sans mono", monaco, "lucida console", "courier new", courier, serif;
+}
+pre{
+	background: #FFFFFF;
+	color: #000000;
+	font: normal 1em "bitstream vera sans mono", monaco, "lucida console", "courier new", courier, serif;
+	margin: 0.9em 2em;
+	overflow: auto;
+	padding: 8px;
+}
+/*
+ * Tables. From	Gesso, after Boilerplate.
+ */
+table { border-collapse: separate; border-spacing: 0; }
+table { margin-bottom: 1.4em; }
+th { border-bottom: 2px solid #ddd; font-weight: bold; }
+td { border-bottom: 1px solid #ddd; }
+th,td { padding: 4px 10px 4px 0; }
+tfoot { font-style: italic; }
+caption { background: #ffc; }
+th{
+	background: #eee;
+}
+.hentry{
+	margin: 0 0 3em 0;
+}
+.sticky{
+	background: #F2F7FC;
+	border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 4px 4px;
+	border-top: 3px solid #000;
+}
+.sticky .meta{
+	background: #ddd;
+}
+.entry-title{
+	clear: both;
+	font-size: 2.5em;
+	letter-spacing: -1.5px;
+	line-height: 99%;
+	margin: 0;
+}
+h2.page-title{
+	margin: 0 0 .3em;
+}
+.entry-title a:link, .entry-title a:visited{
+	color: #111;
+	text-decoration: none;
+}
+.entry-title a:hover, .entry-title a:active{
+	background: transparent;
+	color: #005C9E;
+	text-decoration: underline;
+}
+.posted{
+	color: #a9a9a9;
+	float: left;
+	font: normal 1.15em helvetica, arial, verdana, sans-serif;
+	letter-spacing: -1px;
+	margin: 1px 0 0 2px;
+}
+.posted .fn{
+	font-weight: bold;
+}
+.posted a:link, .posted a:visited{
+	color: #a9a9a9;
+	background: transparent;
+	text-decoration: none;
+}
+.posted a:hover{
+	text-decoration: underline;
+}
+br.downpad{
+	margin: 0 0 33px;
+}
+.admin-edit{
+    clear: both;
+}
+.pgnum-link{
+	font-weight: bold;
+	margin: 1.2em 0;
+}
+.pgnum-link a:link, .pgnum-link a:visited{
+	background: #ddd;
+	font-weight: normal;
+}
+.pgnum-link a:hover, .pgnum-link a:active{
+	background: #005C9E;
+}
+.meta{
+	background: #eee;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	clear: both;
+	font-size: .85em;
+	list-style-type: none;
+	margin-left: 0;
+	padding: 5px;
+}
+.meta li{
+	line-height: 13px;
+	margin: 0;
+	padding: 0;
+}
+.meta a:link, .meta a:visited{
+	border-bottom: 1px dotted #aaa;
+	color: #555;
+	text-decoration: none;
+}
+.meta a:hover, .meta a:active{
+	color: #fff;
+}
+.nocomments, .nopassword{
+	display: none;
+}
+#comments{
+	clear: both;
+}
+ol.commentlist{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+li.comment, li.trackback, li.pingback{
+	border-left: 1px dashed #bbb;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	list-style-type: none;
+	margin-bottom: 1.5em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+	padding-top: 0.5em;
+}
+li.depth-1{
+	border: 1px solid #ddd;
+	margin: 1.5em 0;
+}
+li.comment.preview{
+	background: #ffc;
+	border: 3px solid #fab444;
+	list-style-type: none;
+	padding: 1em;
+}
+.comment-head{
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+.comment-author{
+	font-size: 1.3em;
+	letter-spacing: -1px;
+}
+span.says{
+	display: none;
+}
+.comment-head abbr{
+	color: #999;
+}
+a.comment-permalink{
+	text-decoration: none;
+}
+.comment-author .avatar{
+	background: #fff;
+	clear:both;
+	float: right;
+	margin: 0.5em;
+}
+.comment p{
+	margin-right: 2em;
+}
+#commentform{
+	background: #f2f2f2;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 1em 0.5em;
+}
+#commentform fieldset{
+	border: none;
+}
+#commentform legend{
+	display: none;
+}
+#commentform label{
+	font-weight: bold;
+}
+#commentform textarea{
+	height: 150px;
+	padding: 3px;
+	width: 90%;
+}
+.more-link{
+	font-style: italic;
+}
+.navigation{
+	display: block;
+	font-size: .9em;
+	margin-bottom: 60px;
+	margin-top: 24px;
+	text-align: center;
+}
+.prevlink{
+	float: left;
+}
+.nextlink{
+	float:right;
+}
+#sidebar h2{
+	font: bold 1.3em "lucida grande", calibri, "liberation sans", verdana, arial, helvetica, sans-serif;
+	margin: 1.2em 0 0.5em;
+	letter-spacing: normal;
+}
+#sidebar h2 a:link, #sidebar h2 a:visited{
+	color: #005C9E;
+	text-decoration: none;
+}
+#sidebar h2 a:hover, #sidebar h2 a:active{
+	background: transparent;
+	text-decoration: underline;
+}
+#sidebar ul{
+	list-style-type: none;
+	margin: 0 0 2em;
+	padding: 0;
+}
+#sidebar li{
+	margin: 0;
+	padding: 1px 0;
+}
+#sidebar ul ul ul{
+	margin: 0;
+	padding: 0;
+}
+#sidebar ul li li li{
+	list-style-type: square;
+	margin-left: 1.5em;
+}
+#sidebar em{
+	font-style: normal;
+}
+#sidebar .widget_tag_cloud{
+	margin-bottom: 2em;
+}
+#sidebar label.screen-reader-text{
+	display: none;
+}
+
+#footer a:link, #footer a:visited{
+	color: #005C9E;
+}
+#footer a:hover, #footer a:active{
+	color: #fff;
+	background: #000;
+}
+#footer hr{
+	display: none;
+}
+#footer p{
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 40%;
+}
+#footer ul{
+	float: right;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: right;
+	width: 40%;
+}
+#footer li{
+	display: inline;
+	margin: 0;
+	padding: 0 0 0 1em;
+}
+
+/* Applied-last Element Treatments */
+input, textarea{
+	font: normal 1em "bitstream vera sans", verdana, sans-serif;
+}
+abbr{
+	border: none;
+}
+cite{
+	font-style: normal;
+}
+a img{
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+a:link, a:visited{
+	color: #005C9E;
+}
+a:hover, a:active{
+	background: #000;
+	color: #fff;
+}
+span.caps{
+	font-size: 0.9em;
+	letter-spacing: .07em;
+}
+p img{
+	max-width: 100%;
+	padding: 0;
+}
+.aligncenter, div.aligncenter, img.centered{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+img.alignleft{
+	display: inline;
+	margin: 0 7px 2px 0;
+	padding: 4px;
+}
+img.alignright{
+	display: inline;
+	margin: 0 0 2px 7px;
+	padding: 4px;
+}
+.alignleft{
+	float: left
+}
+.alignright{
+	float: right;
+}
+span.caps{
+	cursor: help;
+}
+.center{
+	text-align: center;
+}
+.hidden{
+	display: none;
+}
+.clear{
+	clear: both;
+}
+
+/* WordPress img captions */
+.wp-caption{
+	background-color: #eeeeee;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	margin: 10px;
+	padding-top: 4px;
+	text-align: center;
+}
+.wp-caption img{
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+.wp-caption p.wp-caption-text{
+	font-size: 0.8em;
+	padding: 1em 4px 0 5px;
+}
+
+/* WordPress image gallery */
+.gallery{
+	margin: auto;
+}
+.gallery .gallery-item{
+	float: left;
+	margin-top: 0;
+	text-align: center;
+	width: 33%;
+}
+.gallery .gallery-caption{
+	font-size: 0.8em;
+	margin: 0 0 12px;
+}
+.gallery dl{
+	margin: 0;
+}
+.gallery img{
+	border: 5px solid #eee;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+/* Shared between search and sitemap templates archive listings. */
+.archive-index .entry-title a:link,
+.archive-index .entry-title a:visited{
+	text-decoration: underline;
+}
+.archive-index .entry-title a:hover,
+.archive-index .entry-title a:active{
+	background: #000 none repeat scroll 0 0;
+	color: #fff;
+}
+/* Sitemap template restyles .entry-title as list item. */
+#sitemap-list .hentry{
+	margin: 0 0 0 1em;
+}
+#sitemap-list .entry-title{
+	font-size: 1em;
+	letter-spacing: normal;
+	line-height: normal;
+}
+#sitemap-list ul ul, #sitemap-list ol ol{
+	margin-left: 0;
+}
+/* Search template restyles .entry-title as list item. */
+.search-results .entry-title{
+	font-size: 1.7em;
+	letter-spacing: -1px;
+}
+/* Post thumbnails on search results. */
+.attachment-post-thumbnail{
+	float: left;
+	margin: 4px 10px 10px 2px;
+}
+
+@media print{
+	/* (Modified) Gesso */
+	body{background:none; color:#000; font-family:"Times New Roman", serif; font-size:12pt; line-height:1.4; margin:0; padding:0; width:100%;}
+	h1{font-size:18pt;}
+	h2{font-size:16pt;}
+	h3{font-size:14pt;}
+	h4,h5,h6{font-family:Helvetica, Arial, sans-serif; font-size:12pt;}
+	code,pre{font:10pt Courier, monospace;}
+	blockquote{font-size:10pt; margin:1.25em; padding:1em;}
+	hr{background:#ccc; background-color:#ccc; border:none; color:#ccc; height:2px; margin:5px 0; padding:0; width:100%;}
+	table{margin:1px; text-align:left;}
+	th,td{border-bottom:1px solid #ccc; padding:4px 10px 4px 0;}
+	tfoot{font-style:italic;}
+	caption{background:#fff; margin-bottom:2em; text-align:left;}
+	tr{page-break-inside:avoid;}
+	/* Simplish */
+	#content{
+		float: none;
+		width: 90%;
+	}
+	.admin-edit, form.comments, .reply{
+		display: none;
+	}
+	.meta, li.depth-1{
+		border: none;
+	}
+	#sidebar{
+		display:none;
+	}
+}
+­ÊÖâ®-      ZÀÌZÀÌ>ç4 ZÉ>L   <    :http://dreamcatcher.ru/wp-content/themes/simplish/style.css necko:classified 1 strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
+Server: nginx/1.12.2
+Date: Sat, 31 Mar 2018 21:55:26 GMT
+Content-Type: text/css
+Content-Length: 12988
+Last-Modified: Wed, 20 Jul 2016 07:14:01 GMT
+ETag: "578f24b9-32bc"
+Accept-Ranges: bytes
+ original-response-headers Server: nginx/1.12.2
+Date: Sat, 31 Mar 2018 21:55:26 GMT
+Content-Type: text/css
+Content-Length: 12988
+Last-Modified: Wed, 20 Jul 2016 07:14:01 GMT
+Connection: keep-alive
+ETag: "578f24b9-32bc"
+Accept-Ranges: bytes
+ uncompressed-len 0 net-response-time-onstart 115 net-response-time-onstop 116   2¼

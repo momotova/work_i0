@@ -1,0 +1,10 @@
+
+simulator lang=spectre
+
+parameters 
+
+r_res3_0 gnd port_out_2 default_0 r=50000 
+r_res1_1 n_1 nv_1 default_0 r=50000 
+c_cap1_2 port_out_2 n_1 default_1 c=3.2e-011 
+c_cap2_3 gnd port_out_2 default_1 c=3.2e-011 
+v_vsin1_4 nv_1 gnd vsource type=sine freq=10000000 mag=5 vo=0 va=1

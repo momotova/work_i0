@@ -1,0 +1,14 @@
+*** Test banch for subckt ***
+simulator lang=spectre
+ahdl_include "r_var.va"
+global gnd 
+
+x11 nv_1 gnd nv_2 gnd  r_var r0=10 cr1=0 cr2=0 br1=0 br2=0 ar1=1 ar2=1
+r_res1_1 nv_1 nv_2 resistor r=10
+v_vpul1_2 nv_1 gnd vsource type=pulse val0=0 val1=3 period=5e-008 rise=1e-009 fall=1e-009 width=1e-008 
+
+timesweep tran start=0.000000e+000 stop=2.000000e-008 maxstep=1.000000e-009 oppoint=logfile 
+
+saveoptions options save=all currents=all rawfmt=apb
+
+default_options options tnom=2.700000e+001 temp=2.700000e+001  

@@ -1,0 +1,16 @@
+
+***** SymSpice --- v3.1.0.0209 *****
+
+Job started at	23.49.25   14/10/2017.
+
+Loading file: '/home/olya/SYMICA/share/symica/spice.ini'. Please wait...                                                                             (23:49:25)
+Loading file: '/home/olya/SYMICA/share/symica/doc/examples/symspice/tran/Mouse_sm/hier/translr.net'. Please wait...                                  (23:49:26)
+In file './translr.cir':
+  _warning_: option 'post' not supported
+  __error__: simulation of circuits with more than 300 elements is not available in Free Edition
+  __error__: parsing of input file failed
+
+Job ended at	23.49.26   14/10/2017.
+
+Job time summary:
+Total time used = 1s  (CPU time 0.997s)

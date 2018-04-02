@@ -1,0 +1,34 @@
+
+`include "discipline.h"
+`include "constants.h"
+
+module res_va(p,n);
+inout p, n;
+electrical p, n;
+
+parameter real l=1e-6;
+parameter real w=1e-6;
+parameter real rsh0=1;
+parameter real dw=0;
+parameter real dl=0;
+parameter real vc1=0;
+parameter real vc2=0;
+parameter real tc1=0;
+parameter real tc2=0;
+parameter real tnom=25;
+parameter real m=1; 
+
+real r_l, r_w, r_n, r_temp, r;
+analog begin
+
+r_l=l-2*dl;
+r_w=w-2*dw;
+r_n=r_l/r_w;
+r_temp=1+tc1*($temperature-273.15-tnom)+tc2*($temperature-273.15-tnom)*($temperature-273.15-tnom);
+
+r=r_temp*r_n*(rsh0+vc1*abs(V(p,n))/r_n+vc2*abs(V(p,n))*abs(V(p,n))/r_n/r_n);
+I(p, n) <+ V(p,n)/(r/m);
+
+end
+
+endmodule

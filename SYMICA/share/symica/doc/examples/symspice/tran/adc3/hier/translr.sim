@@ -1,0 +1,10 @@
+*** Title:
+
+.op
+.tran 5.000000e-008 5.000000e-006 start=0.000000e+000
+ 
+.probe tran v(port_c_8) v(port_in_9) v(port_a0_10) v(port_q1_14) v(port_q0_13) v(port_qp_12) v(port_q2_15) v(port_kdr_11) v(port_dst_16) v(port_rd0_7) v(x_block2.x_dd2.n_7) v(x_block2.n_9) 
+
+.options probe post apb=1
+
+.temp 2.500000e+001

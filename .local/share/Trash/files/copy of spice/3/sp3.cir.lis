@@ -1,0 +1,40 @@
+
+***** SymSpice --- v2.4.0.0527 *****
+
+Job started at	20.50.12   06/10/2017.
+
+Loading file: '/home/student/bin/SYMICA/share/symica/spice.ini'. Please wait...                                                                      (20:50:12)
+Loading file: '/home/student/u120137/spice/3/sp3.cir'. Please wait...(20:50:12)
+
+Netlist summary (root)                                              (20:50:12)
+
+  Nodes   	2
+  Elements	1
+  _warning_: node '1' floating
+Count of floating nodes: 1
+  _warning_: Multithreading is not available in Free Edition. "multithread" set to 1
+
+Multithreading
+	Number of used threads		: 1
+	Maximum number of threads	: 2
+
+Start creating models...
+
+
+Circuit summary
+	Equations : 2
+	Elements  : 1
+
+	Type info
+	   Vpulse : 1    
+
+Total time of model creation: 0s  (CPU time 0.000s).
+
+  _warning_: No analysis specified.
+
+Simulation failed
+
+Job ended at	20.50.12   06/10/2017.
+
+Job time summary:
+Total time used = 0s  (CPU time 0.330s)

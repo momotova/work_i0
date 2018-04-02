@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Symica Waveform Viewer
+GenericName=Waveform Viewer
+TryExec=symprobe
+Exec=symprobe %f
+Icon=symica-symprobe
+Categories=Education;Engineering;Electronics;

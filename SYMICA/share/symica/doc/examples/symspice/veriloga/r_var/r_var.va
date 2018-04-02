@@ -1,0 +1,30 @@
+
+`include "constants.h"
+`include "discipline.h"
+
+module r_var (n1, n2, n3, n4);
+electrical n1, n2, n3, n4;
+inout n1, n2, n3, n4;
+
+parameter real ar1=1;
+parameter real ar2=1;
+parameter real br1=1;
+parameter real br2=1;
+parameter real cr1=1;
+parameter real cr2=1;
+parameter real r0=1; 
+ 
+
+real rval;
+analog begin
+  if ( V(n1,n2) >= 0 ) begin
+    rval=r0+V(n1,n2)*(ar1+br1*V(n1,n2)+cr1*V(n1,n2)*V(n1,n2));
+  end else begin
+    rval= r0+V(n1,n2)*(ar2+br2*V(n1,n2)+cr2*V(n1,n2)*V(n1,n2));
+  end
+  
+I(n3,n4) <+ V(n3,n4)/rval;
+
+end
+
+endmodule

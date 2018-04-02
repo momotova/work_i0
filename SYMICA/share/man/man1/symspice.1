@@ -1,0 +1,61 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH SYMSPICE 1 "February  3, 2012"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+symspice \- Symica circuit simulator
+.SH SYNOPSIS
+\fBsymspice\fP \fI[ options ]  [ [-i] input_file  [[-o] output_file] ]\fP
+.SH DESCRIPTION
+This manual page documents briefly the \fBsymspice\fP command.
+.PP
+\fBsymspice\fP is an original SPICE circuit simulator completely developed by the Symica R&D team. 
+\fBsymspice\fP provides simulation speed and accuracy at the GOLD-SPICE level. 
+\fBsymspice\fP supports all commonly used transistor models and is compatible with industry-standard netlist formats.
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-v, \-\-version
+Show version of program.
+.TP
+.B \-i <input_file>
+Specifies the input netlist file name. The input file can be preceded by -i. 
+The input file name is used as the root file name for the output files. 
+\fBsymspice\fP also checks to see if there is an initial conditions file (.ic) with the input file root name.
+.TP
+.B \-o <output_file>
+Specifies the output file name or directory. 
+If a directory named <output_file> exists, \fBsymspice\fP uses <output_file> as output directory otherwise 
+<output_file> is considered as output file name. 
+If no extension for output file name is given, .lis is assigned.
+.TP
+.B \-format <fmt> [<fmt2> .. <fmtN>]  
+Produces raw data in the format <fmt>. Possible values for <fmt> are 'csdf', 'csv', 'nutbin', 'nutascii', 'apb'.
+.SH SEE ALSO
+.BR symicade (1).
+.BR symprobe (1),
+.BR symlayout (1),
+.BR
+The programs are documented fully by \fISymSpice.pdf\fP.
+.SH AUTHOR
+symspice was written by \fBsymica.com\fP.
+.PP
+This manual page was written by Symica support <support@symica.com> 

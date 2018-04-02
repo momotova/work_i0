@@ -1,0 +1,32 @@
+// VerilogA for ADC10M, CMP2H, veriloga
+`include "constants.vams"
+`include "disciplines.vams"
+
+// 2 comparators
+module CMP2H(QH, QL, IN, OF, ST);
+	output QH,QL;
+	input IN,OF,ST;
+electrical QH,QL,IN,OF,ST;
+	parameter real vda = 3.3 from (1.5:3.5);		// voltage supply for analog part
+	parameter real vdin = 3.3 from (1.5:3.5);		// input voltage level of logic 1 (V)
+	parameter real vdout = 3.2 from (1.5:3.5);		// output voltage level of logic 1 (V)
+	parameter real thresh = vdin/2;				// logic treshold level for inputs(V)
+	parameter real vl = 1.2375 from (0:inf);		// low reference voltage level
+	parameter real vh = 2.0625 from (0:inf);		// high reference voltage level
+	real lsave,hsave;
+analog
+begin
+	//form comparators output signals L and H
+	@(cross(V(ST)-thresh,1)) begin
+		if (V(OF)<thresh) begin
+			if(V(IN)>vl) 	lsave=vdout;
+			else		lsave=0;
+			if(V(IN)>vh)	hsave=vdout;
+			else		hsave=0;
+		end
+	end
+	//produce the outputs
+	V(QL) <+ transition(lsave,3n,100p);
+	V(QH) <+ transition(hsave,3n,100p);
+end
+endmodule 

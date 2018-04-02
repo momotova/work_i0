@@ -1,0 +1,25 @@
+[2018-03-12 21:30:13] __rvm_set_executable
+__rvm_set_executable () 
+{ 
+    for __file in "$@";
+    do
+        [[ -x "${__file}" ]] || chmod +x "${__file}";
+    done
+}
+current path: /home/olya/.rvm/src/ruby-2.5.0
+PATH=/home/olya/bin:/home/olya/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/olya/SYMICA/bin:/home/olya/.rvm/bin
+command(8): __rvm_set_executable /home/olya/.rvm/rubies/ruby-2.5.0/bin/erb /home/olya/.rvm/rubies/ruby-2.5.0/bin/gem /home/olya/.rvm/rubies/ruby-2.5.0/bin/irb /home/olya/.rvm/rubies/ruby-2.5.0/bin/rake /home/olya/.rvm/rubies/ruby-2.5.0/bin/rdoc /home/olya/.rvm/rubies/ruby-2.5.0/bin/ri /home/olya/.rvm/rubies/ruby-2.5.0/bin/ruby
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/erb ]]
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/gem ]]
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/irb ]]
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/rake ]]
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/rdoc ]]
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/ri ]]
+++ for __file in '"$@"'
+++ [[ -x /home/olya/.rvm/rubies/ruby-2.5.0/bin/ruby ]]

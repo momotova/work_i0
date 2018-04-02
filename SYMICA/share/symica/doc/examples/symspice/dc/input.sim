@@ -1,0 +1,13 @@
+
+simulator lang=spectre
+
+sweepsecond sweep  param=ress values=[ 1.000000e+001 1.000000e+002 1.000000e+003 ] {
+dcsweep dc  dev=v_vdc2_5 start=0.000000e+000 stop=5.000000e+000 step=1.000000e-001 
+}
+
+save v_vdc2_5:currents 
+
+saveoptions options save=all currents=all  redundant_currents=yes rawfmt=apb
+
+default_options options tnom=2.700000e+001 temp=2.700000e+001  
+

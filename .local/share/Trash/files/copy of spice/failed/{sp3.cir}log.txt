@@ -1,0 +1,10 @@
+
+***** SymSpice --- v2.4.0.0527 *****
+
+Job started at	20.50.12   06/10/2017.
+
+
+Job ended at	20.50.12   06/10/2017.
+
+Job time summary:
+Total time used = 0s  (CPU time 0.330s)

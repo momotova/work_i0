@@ -1,0 +1,47 @@
+*** Title:
+
+.tran 1.000000e-007 3.500000e-005 start=0.000000e+000
+
+.probe tran i1(v_vpulse6_2) i1(v_vpulse5_32) i1(v_vpulse4_13) i1(v_vpulse3_10) i3(x_da1.x_da2.x_da1.m_m22_22)
+             +v(n_22)
+             +v(rr)
+             +v(x)
+             +v(n_2)
+             +v(n_37)
+             +v(n_35)
+             +v(n_34)
+             +v(n_32)
+             +v(n_31)
+             +v(n_28)
+             +v(n_27)
+             +v(n_25)
+             +v(x_da1.x_da2.n_16)
+             +v(x_da1.x_da2.n_22)
+             +v(x_da1.n_20)
+             +v(x_da1.n_21)
+             +v(x_da1.n_22)
+             +v(x_da1.n_23)
+             +v(x_da1.n_24)
+             +v(x_da1.n_25)
+             +v(x_da1.n_26)
+             +v(x_da1.n_6)
+             +v(x_da1.n_12)
+             +v(x_da1.x_d2.n_5)
+             +v(x_da1.x_d2.n_8)
+             +v(x_da1.n_9)
+             +v(x_da1.x_da1.n_29)
+             +v(x_da1.n_7)
+             +v(x_da1.n_3)
+             +v(x_da1.n_11)
+             +v(x_da1.n_14)
+             +v(x_da1.n_13)
+             +v(x_da1.n_8)
+             +v(x_da1.n_18)
+             +v(x_da1.n_19)
+
+.options post probe apb=1
+
+.temp 2.700000e+001
+
+.options tnom=2.700000e+001
+

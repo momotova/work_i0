@@ -1,0 +1,13 @@
+*** Title:
+
+.op
+.tran 1.000000e-007 1.210000e-005 start=0.000000e+000
+ 
+.probe v(portv_clk_3) v(portv_r_2) v(n_3) v(n_28802) v(n_28804) v(n_28808) v(n_28812) v(n_28816) v(n_28822) v(n_28843) v(n_28863) 
+
+.options probe=1 
+
+.temp 2.700000e+001
+
+.options apb=1
+

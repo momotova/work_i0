@@ -1,0 +1,20 @@
+
+simulator lang=spice insensitive=yes
+
+.lib nand3
+
+.subckt nand3 Out In3 In1 In2
+
+
+m7 n_7 in3 gnd gnd n l=1.3e-007 w=0.0001 
+m1 out in1 n_4 n_4 p l=1.3e-007 w=0.0001 
+m3 out in2 n_4 n_4 p l=1.3e-007 w=0.0001 
+m6 n_6 in2 n_7 gnd n l=1.3e-007 w=0.0001 
+m4 out in3 n_4 n_4 p l=1.3e-007 w=0.0001 
+m5 out in1 n_6 gnd n l=1.3e-007 w=0.0001 
+v2 n_4 gnd 1.3 
+
+
+.ends nand3
+
+.endl nand3

@@ -1,0 +1,15 @@
+*******************************************************************
+*** This is a root file of the project
+*******************************************************************
+
+simulator lang=spectre
+
+global gnd 
+
+
+model default_0 resistor 
+model default_1 capacitor 
+
+include "input.net"
+include "input.sim"
+

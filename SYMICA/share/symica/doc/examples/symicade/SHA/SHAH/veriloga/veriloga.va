@@ -1,0 +1,62 @@
+// VerilogA for ADC10, SHAH, veriloga
+// sample & hold amplifier for ADC10
+// analog input/output only
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module SHAH(F1, F2, H, L, OF, Y, S, ST, X);
+	parameter real vda = 3.3 from (1.5:3.5);		// voltage supply for analog part	
+	parameter real vdin = 3.3 from (1.5:3.5);		// input voltage level of logic 1 (V)	
+	parameter real vdout = 1.8 from (1.5:3.5);		// output voltage level of logic 1 (V)	
+	parameter real thresh = vdin/2;				// logic treshold level for inputs(V)	
+	parameter real vl = 1.2375 from (0:inf);		// low reference voltage level	
+	parameter real vh = 2.0625 from (0:inf);		// high reference voltage level	
+	parameter real vz = 0.867 from (0.6:1);			// zero voltage level (during signal s)	
+	input F1,F2,OF,S,ST,X;
+	output H,L,Y;
+	voltage F1,F2,OF,S,ST,X,H,L,Y;
+	real xsave,lsave,hsave,vrf,v0;
+analog
+begin	
+	//calculate the reference voltage
+	vrf=(vh-vl)/2;
+	v0=(vh+vl)/2;
+	//sample the input and calculate the output signal
+		@(cross(V(S)-thresh,-1)) begin
+			if (V(OF)<thresh) begin			// testing input OF
+				xsave=2*V(X)-v0;
+				if((lsave<thresh)&&(hsave<thresh)) xsave=xsave+v0;
+				if((lsave>thresh)&&(hsave>thresh)) xsave=xsave-v0;
+//				if((lsave<thresh)&&(hsave<thresh)) xsave=xsave+vrf;
+//				if((lsave>thresh)&&(hsave>thresh)) xsave=xsave-vrf;
+			end
+		end
+		//limiting the output voltage
+		if(xsave > vda) xsave=vda;
+		if(xsave < 0) xsave=0;
+		//form signal Q during signal S
+
+		@(cross(V(S)-thresh,1)) begin
+			if (V(OF)<thresh) xsave=vz;		// testing input OF
+		end
+
+		//form comarators output signals L and H
+		@(cross(V(ST)-thresh,1)) begin
+
+			if (V(OF)<thresh) begin			// testing input OF
+				if(V(X)>vl) 	lsave=vdout;
+				else		lsave=0;
+				if(V(X)>vh)	hsave=vdout;
+				else		hsave=0;
+			end
+		end
+	//produce the outputs
+	V(Y) <+ transition((xsave),2n,8n);
+	V(L) <+ transition(lsave,3n,100p);
+	V(H) <+ transition(hsave,3n,100p);
+//	V(Y) <+ xsave;
+//	V(L) <+ lsave;
+//	V(H) <+ hsave;
+end
+endmodule 

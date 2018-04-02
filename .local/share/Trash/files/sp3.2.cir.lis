@@ -1,0 +1,39 @@
+
+***** SymSpice --- v3.1.0.0209 *****
+
+Job started at	23.09.32   14/10/2017.
+
+Loading file: '/home/olya/SYMICA/share/symica/spice.ini'. Please wait...                                                                             (23:09:32)
+Loading file: '/home/olya/u120137/spice/3/sp3.cir'. Please wait...   (23:09:32)
+
+Netlist summary (root)                                              (23:09:32)
+
+  Nodes   	2
+  Elements	1
+  _warning_: node '1' floating
+Count of floating nodes: 1
+
+Multithreading
+	Number of used threads		: 1
+	Maximum number of threads	: 1
+
+Start creating models...
+
+
+Circuit summary
+	Equations : 2
+	Elements  : 1
+
+	Type info
+	   Vpulse : 1    
+
+Total time of model creation: 0s  (CPU time 0.000s).
+
+  _warning_: No analysis specified.
+
+Simulation failed
+
+Job ended at	23.09.32   14/10/2017.
+
+Job time summary:
+Total time used = 0s  (CPU time 0.196s)

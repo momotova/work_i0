@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!---------------------------------------------------------------->
+<!-- interface for SIM was written by Yakupov M & Sukharev S -->
+<!---------------------------------------------------------------->
+
+<!DOCTYPE admst SYSTEM "admst.dtd">
+<admst version="2.2.9" xmlns:admst="http://mot-adms.sourceforge.net/xml-files/admst">
+
+<admst:template match="code_clean">
+  <admst:value-of select="name"/>
+  <admst:variable name="module" select="%s"/>
+
+clean_$(module) :
+	-@\$(rm) $(module).\$(OBJ_EXT)
+	-@\$(rm) $(module).cpp
+	-@\$(rm) $(module).h
+	-@\$(rm) $(module)AnalogFunctions.cpp
+</admst:template>
+
+<admst:template match="code">
+  <admst:value-of select="name"/>
+  <admst:variable name="module" select="%s"/>
+
+$(module).\$(OBJ_EXT) :
+	\$(CPP) \$(CPP_PROJ) -o $(module).\$(OBJ_EXT) $(module).cpp
+    
+</admst:template>
+
+<admst:template match="body">
+  <admst:value-of select="/basefilename"/>
+  <admst:variable name="fname" select="%s"/>
+
+OBJ_EXT=o
+rm=rm -f
+
+LIBDIR_MOD   =\$(SPICE_MODLIB_BASE)
+OBJDIR       =\$(SPICE_MODLIB_BASE)/../../../lib/symica
+CPP_PROJ     =-c -fPIC \$(ARCH_FLAGS) -O3 -fexceptions -I\$(LIBDIR_MOD) -msse3 -mfpmath=sse -finline-functions -DKIPARIS_AUTO_BUILD -DUSE_KIP_EXP
+#CPP_PROJ    =\$(CPP_PROJ) -g
+LINK32_FLAGS =-fPIC \$(ARCH_FLAGS) -O3 -fexceptions -shared 
+#LINK32_FLAGS=\$(LINK32_FLAGS) -g
+
+LINK32=\$(CPP)
+LINK32_COMMON_OBJS= "\$(OBJDIR)/arrays.\$(OBJ_EXT)" "\$(OBJDIR)/compat_str.\$(OBJ_EXT)" "\$(OBJDIR)/kipmodels.\$(OBJ_EXT)" "\$(OBJDIR)/kiparis_math_sse2.\$(OBJ_EXT)"
+LINK32_GEN_OBJS_VAR= 
+<admst:for-each select="/module">
+  <admst:value-of select="name"/>
+  <admst:text format="%s.\$(OBJ_EXT) "/>
+</admst:for-each>
+LINK32_GEN_OBJS=\$(LINK32_GEN_OBJS_VAR) $(fname)_load.\$(OBJ_EXT) $(fname)_noise.\$(OBJ_EXT)
+
+all : $(fname).so
+
+cleanall : clean
+	-@\$(rm) $(fname).so
+
+clean : clean_common clean_generated clean_modules
+	-@\$(rm) Makefile
+
+clean_generated :
+	-@\$(rm) $(fname)_load.cpp
+	-@\$(rm) $(fname)_noise.cpp
+	-@\$(rm) $(fname)_load.\$(OBJ_EXT)
+	-@\$(rm) $(fname)_noise.\$(OBJ_EXT)
+	-@\$(rm) $(fname).def
+	-@\$(rm) .$(fname).adms
+
+clean_common : 
+	-@\$(rm) .adms.implicit.xml
+	-@\$(rm) disciplines.vams
+	-@\$(rm) constants.vams
+	-@\$(rm) discipline.h
+	-@\$(rm) constants.h
+	-@\$(rm) .interface.xml
+
+clean_modules : 
+<admst:for-each select="/module">
+  <admst:value-of select="name"/>
+  <admst:text format="clean_%s "/>
+</admst:for-each>
+
+<admst:for-each select="/module">
+  <admst:value-of select="name"/>
+  <admst:variable name="module" select="%s"/>
+  <admst:apply-templates select="." match="code_clean"/>
+</admst:for-each>
+
+$(fname).so :  \$(LINK32_GEN_OBJS)
+	\$(LINK32) \$(LINK32_FLAGS) \$(LINK32_GEN_OBJS) \$(LINK32_COMMON_OBJS) -o $(fname).so
+
+<admst:for-each select="/module">
+  <admst:value-of select="name"/>
+  <admst:variable name="module" select="%s"/>
+  <admst:apply-templates select="." match="code"/>
+</admst:for-each>
+
+$(fname)_load.\$(OBJ_EXT) :
+	\$(CPP) \$(CPP_PROJ) -o $(fname)_load.\$(OBJ_EXT)  $(fname)_load.cpp
+
+$(fname)_noise.\$(OBJ_EXT) :
+	\$(CPP) \$(CPP_PROJ) -o $(fname)_noise.\$(OBJ_EXT) $(fname)_noise.cpp
+
+</admst:template>
+
+<admst:open file="./Makefile">
+  <admst:apply-templates select="." match="body"/>
+  <admst:message format="Makefile: file created\n"/>
+</admst:open>
+</admst>

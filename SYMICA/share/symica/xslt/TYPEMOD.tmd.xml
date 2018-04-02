@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE admst SYSTEM "admst.dtd">
+<admst version="2.2.9" xmlns:admst="http://mot-adms.sourceforge.net/xml-files/admst">
+
+<admst:template match="paraminfo">
+  <admst:choose>
+    <admst:when test="attribute[name='info' or name='desc']">
+      <admst:for-each select="attribute[name='info' or name='desc']">
+        <admst:text format="&quot;%(value)&quot;	"/>
+      </admst:for-each>
+    </admst:when>
+    <admst:otherwise>
+      <admst:text format="&quot;None information&quot;	"/>
+    </admst:otherwise>
+  </admst:choose>
+</admst:template>
+
+<admst:template match="paramunit">
+  <admst:choose>
+    <admst:when test="attribute[name='unit' or name='units']">
+      <admst:for-each select="attribute[name='unit' or name='units']">
+        <admst:text format="&quot;%(value)&quot;"/>
+      </admst:for-each>
+    </admst:when>
+    <admst:otherwise>
+      <admst:text format="&quot;None unit&quot;"/>
+    </admst:otherwise>
+  </admst:choose>
+</admst:template>
+
+<admst:template match="instanceparam">
+  <admst:for-each select="variable[(parametertype='instance' or (parametertype='model' and #subtype_both='yes')) and input='yes']">
+    <admst:if test="[sizetype='scalar']">
+      <admst:text format="	&quot;%(name)&quot;	p	&quot;&quot;	"/>
+    </admst:if>
+    <admst:if test="[sizetype='array']">
+      <admst:text format="	&quot;%(name)&quot;	v	&quot;&quot;	"/>
+    </admst:if>
+    <admst:apply-templates select="." match="paraminfo"/>
+    <admst:apply-templates select="." match="paramunit"/>
+    <admst:text format="\n"/>
+  </admst:for-each>
+  <admst:text format="	&quot;Paramref&quot;	p	&quot;&quot;	&quot;Parameter set reference&quot;	&quot; &quot;"/>
+</admst:template>
+
+<admst:template match="modelparam">
+  <admst:choose>
+    <admst:when test="variable[(parametertype='model' or (parametertype='instance' and #subtype_both='yes')) and input='yes']">
+      <admst:for-each select="variable[(parametertype='model' or (parametertype='instance' and #subtype_both='yes')) and input='yes']">
+        <admst:if test="[sizetype='scalar']">
+          <admst:text format="	&quot;%(name)&quot;	p	&quot;&quot;	"/>
+        </admst:if>
+        <admst:if test="[sizetype='array']">
+          <admst:text format="	&quot;%(name)&quot;	v	&quot;&quot;	"/>
+        </admst:if>
+        <admst:apply-templates select="." match="paraminfo"/>
+        <admst:apply-templates select="." match="paramunit"/>
+        <admst:text format="\n"/>
+      </admst:for-each>
+    </admst:when>
+    <admst:otherwise>
+      <admst:text format="	&quot;dummy&quot;	p	&quot;&quot;	&quot;None definition&quot;	&quot;none unit&quot;"/>
+    </admst:otherwise>
+  </admst:choose>
+</admst:template>
+
+<admst:template match="lv_lx_section">
+  <admst:if test="variable[#op_parameter = 'yes']">
+    <admst:text format="\n\nLV\n\t&quot; &quot;\t&quot;&quot;\t&quot; &quot;\n"/>
+    <admst:text format="LX\n"/>
+    <admst:for-each select="variable[#op_parameter = 'yes']">
+      <admst:text format="	&quot;%(name)&quot;	"/>
+      <admst:apply-templates select="." match="paraminfo"/>
+      <admst:apply-templates select="." match="paramunit"/>
+      <admst:text format="\n"/>
+    </admst:for-each>
+  </admst:if>
+</admst:template>
+
+<admst:template match="syn_section">
+  <admst:if test="variable[not(nilled(alias))]">
+    <admst:text format="\n\nSYNONYM\n;\tsyn\tname\n"/>
+    <admst:for-each select="variable[not(nilled(alias))]/alias">
+      <admst:text format="	&quot;%(.)&quot;	&quot;%(../name)&quot;\n"/>
+    </admst:for-each>
+  </admst:if>
+</admst:template>
+
+<admst:template match="noise_section">
+  <admst:new datatype="list" arguments="">
+    <admst:variable name="noise_outnames_list" select="%(.)"/>
+  </admst:new>
+  <admst:apply-templates select="." match="collect_noise_info"/>
+  <admst:if test="$noise_outnames_list/item">
+    <admst:text format="\n\nNOISE\n; Noise parameters\n"/>
+  </admst:if>
+  <admst:for-each select="$noise_outnames_list/item">
+    <admst:text format="\t&quot;%(.)&quot;\t&quot; &quot;\t&quot;V^2/Hz&quot;\n"/>
+  </admst:for-each>
+</admst:template>
+
+<admst:template match="templateind">
+  <admst:text format="TEMPLATEIND	&quot;{@ENAME FIRSTSTR=m}"/>
+  <admst:for-each select="node[location='external']">
+    <admst:text format=" {@NODE NUM=%(position(.)-1) NAME=%(name)"/>
+    <admst:if test="attribute[name='nodetype' and value='optional']">
+      <admst:text format=" NODEOPT=opt"/>
+    </admst:if>
+    <admst:text format="}"/>
+  </admst:for-each>
+  <admst:text format=" @GRPPARREF {@INDPARNAME_EQ_INDPARVALUE}&quot;"/>
+</admst:template>
+
+<admst:template match="spectre">
+  <admst:variable name="module" select="%(name)"/>
+TYPEMODEL	&quot;$(module)&quot;	&quot;0x00000000&quot;	nonbinned nonleveled
+SIMULATOR	&quot;SPECTRE&quot;
+SIMTYPEMODEL	&quot;$(module)&quot;\n
+  <admst:apply-templates select="." match="templateind"/>
+TEMPLATEGRP	&quot;model @GRPPARREF $(module) @GRPPARNAME_EQ_GRPPARVALUE&quot;\n
+INDIVIDUAL\n
+  <admst:apply-templates select="." match="instanceparam"/>
+GROUP\n
+  <admst:apply-templates select="." match="modelparam"/>
+END\n
+</admst:template>
+
+<admst:template match="local">
+  <admst:variable name="module" select="%(name)"/>
+TYPEMODEL	&quot;$(module)&quot;	&quot;0x00000000&quot;	nonbinned nonleveled
+SIMULATOR	&quot;LOCAL&quot;
+SIMTYPEMODEL	&quot;$(module)&quot;
+  <admst:for-each select="attribute[name='add_model_name' or name='add_model_name1' or name='add_model_name2' or name='add_model_name3']">
+    <admst:text format=" &quot;%(value)&quot;"/>
+  </admst:for-each>\n
+  <admst:apply-templates select="." match="templateind"/>
+TEMPLATEGRP	&quot;.model @GRPPARREF $(module) @GRPPARNAME_EQ_GRPPARVALUE&quot;\n
+INDIVIDUAL\n
+  <admst:apply-templates select="." match="instanceparam"/>
+GROUP\n
+  <admst:apply-templates select="." match="modelparam"/>
+  <admst:apply-templates select="." match="lv_lx_section"/>
+  <admst:apply-templates select="." match="syn_section"/>
+  <admst:apply-templates select="." match="noise_section"/>
+END\n
+</admst:template>
+
+
+<admst:open file="%(/basefilename).tmd">
+  <admst:for-each select="/module">
+    <admst:apply-templates select="." match="local"/>
+    <admst:apply-templates select="." match="spectre"/>
+  </admst:for-each>
+END\n
+</admst:open>
+
+<admst:message format="%(/basefilename).tmd: file created\n"/>
+
+</admst>
+

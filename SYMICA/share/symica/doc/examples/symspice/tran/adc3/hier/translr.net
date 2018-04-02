@@ -1,0 +1,468 @@
+*** Title:
+
+.global gnd! g_vl! g_vdd! g_vh! g_rfh! g_rfl! g_vda! 
+
+v_vdc1_0 g_vdd! gnd! 2.5 
+v_vdc2_1 g_vda! gnd! 2.5 
+v_vdc3_2 g_vh! gnd! 1.8 
+v_vdc4_3 g_vl! gnd! 0.6 
+v_vdc5_4 g_rfh! gnd! 2.4 
+v_vdc6_5 g_rfl! gnd! 0 
+v_vpulse1_6 port_rd0_7 gnd! pulse 0 2.5 5.25e-007 1e-010 1e-010 5e-008 3.2e-006 
+v_vpulse2_7 port_c_8 gnd! pulse 0 2.5 0 1e-010 1e-010 2.5e-008 5e-008 
+v_vpulse4_8 port_a0_10 gnd! pulse 0 2.5 2.15e-006 1e-010 1e-010 5e-008 3.2e-006 
+v_vpulse3_9 port_in_9 gnd! pulse 0 2.5 0 1e-006 1e-006 1e-006 4e-006 
+x_block2 port_q0_13 port_q1_14 port_q2_15 port_a0_10 port_c_8 port_rd0_7 port_kdr_11 port_dst_16 port_in_9 port_qp_12 adc_1 
+
+.subckt rst port_q_7 port_x2_9 port_s_0 port_x1_2 
+m_nmos3_0 n_5 port_q_7 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_1 n_5 n_4 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos1_2 n_4 port_s_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos6_3 g_vdd! port_x1_2 n_4 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos7_4 port_x1_2 port_s_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos2_5 n_8 port_x2_9 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=3e-006  
+m_pmos1_6 n_6 port_x1_2 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos5_7 port_q_7 port_x2_9 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos3_8 port_q_7 n_5 n_8 g_vdd! pmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos4_9 port_q_7 n_5 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos4_10 n_5 port_q_7 n_6 g_vdd! pmos_tkt2 l=2.4e-007 w=3e-006  
+.ends
+
+.subckt ssum port_c_5 port_s_6 port_a_1 port_b_0 
+x_dd5 port_s_6 n_3 n_4 or2 
+x_dd2 n_3 port_b_0 port_a_1 or2 
+x_dd4 port_c_5 n_2 not 
+x_dd3 n_4 n_2 not 
+x_dd1 n_2 port_b_0 port_a_1 and2 
+.ends
+
+.subckt ctr1 port_q_10 port_r_8 port_c_0 
+m_nmos1_0 n_1 port_c_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos3_1 n_5 n_1 n_6 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_2 n_6 port_c_0 n_4 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos4_3 n_7 n_6 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos5_4 n_5 n_7 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos10_5 n_5 port_r_8 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos7_6 n_5 n_1 n_11 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos6_7 n_11 port_c_0 port_q_10 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos8_8 n_4 n_11 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos9_9 port_q_10 n_4 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos11_10 port_q_10 port_r_8 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_11 n_1 port_c_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos2_12 n_4 n_1 n_6 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos3_13 n_6 port_c_0 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos6_14 n_7 n_6 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos7_15 n_9 port_r_8 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos10_16 n_5 n_7 n_9 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos4_17 port_q_10 n_1 n_11 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos5_18 n_11 port_c_0 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos8_19 n_4 n_11 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos9_20 n_12 port_r_8 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos11_21 port_q_10 n_4 n_12 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+.ends
+
+.subckt and2 port_q_2 port_x2_0 port_x1_1 
+m_nmos2_0 n_5 port_x1_1 gnd! gnd! nmos_tkt2 l=2.4e-007 w=1.2e-006  
+m_nmos1_1 port_q_2 port_x2_0 n_5 gnd! nmos_tkt2 l=2.4e-007 w=1.2e-006  
+m_pmos1_2 port_q_2 port_x2_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos2_3 port_q_2 port_x1_1 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+.ends
+
+.subckt or2 port_q_3 port_x2_1 port_x1_0 
+m_nmos2_0 port_q_3 port_x1_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos1_1 port_q_3 port_x2_1 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_2 port_q_3 port_x2_1 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=3e-006  
+m_pmos2_3 n_5 port_x1_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=3e-006  
+.ends
+
+.subckt buf port_q_4 port_x_0 
+m_nmos1_0 n_1 port_x_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_1 n_1 port_x_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos2_2 port_q_4 n_1 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=8e-006  
+m_nmos2_3 port_q_4 n_1 gnd! gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+.ends
+
+.subckt not port_q_2 port_x_0 
+m_nmos1_0 port_q_2 port_x_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_1 port_q_2 port_x_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+.ends
+
+.subckt xor2 port_q_5 port_b_1 port_a_0 
+x_block1 n_3 port_b_1 port_a_0 and2 
+x_block2 n_4 n_3 not 
+x_block4 port_q_5 n_2 n_4 or2 
+x_block3 n_2 port_b_1 port_a_0 or2 
+.ends
+
+.subckt lg1 port_q_4 port_x_2 port_r_0 port_s_1 
+x_dd2 port_q_4 port_s_1 n_3 and2 
+x_dd1 n_3 port_r_0 port_x_2 and2 
+.ends
+
+.subckt lg2 port_c_4 port_q_3 port_a_0 port_b_1 
+x_dd2 port_c_4 port_b_1 port_a_0 or2 
+x_dd3 port_q_3 n_2 port_a_0 and2 
+x_dd1 n_2 port_b_1 not 
+.ends
+
+.subckt lg3 port_r_6 port_s_5 port_a_0 port_b_1 
+x_dd2 n_4 port_b_1 port_a_0 and2 
+x_dd3 n_3 n_2 port_b_1 and2 
+x_dd4 port_r_6 n_4 buf 
+x_dd5 port_s_5 n_3 buf 
+x_dd1 n_2 port_a_0 not 
+.ends
+
+.subckt tr1 port_q_6 port_c_1 port_d_0 
+m_nmos1_0 n_4 port_c_1 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_1 port_q_6 port_c_1 n_5 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos3_2 n_5 n_4 port_d_0 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos4_3 n_7 n_5 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos5_4 port_q_6 n_7 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_5 n_4 port_c_1 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos3_6 port_d_0 port_c_1 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos2_7 n_5 n_4 port_q_6 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos4_8 n_7 n_5 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos5_9 port_q_6 n_7 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+.ends
+
+.subckt buf1 port_q_6 port_x_0 
+m_nmos1_0 n_2 port_x_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_1 n_4 n_2 gnd! gnd! nmos_tkt2 l=2.4e-007 w=1.8e-006  
+m_nmos3_2 n_5 n_4 gnd! gnd! nmos_tkt2 l=2.4e-007 w=5e-006  
+m_pmos2_3 n_4 n_2 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=5e-006  
+m_pmos1_4 n_2 port_x_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_nmos4_5 port_q_6 n_5 gnd! gnd! nmos_tkt2 l=2.4e-007 w=5e-006 m=3  
+m_pmos4_6 port_q_6 n_5 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1e-005 m=5  
+m_pmos3_7 n_5 n_4 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=5e-006 m=3  
+.ends
+
+.subckt dt port_q_9 port_c_1 port_d_0 
+m_nmos3_0 n_4 port_c_1 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_1 n_5 port_c_1 n_6 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos1_2 n_6 n_4 port_d_0 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos4_3 n_7 n_6 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos5_4 n_5 n_7 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos7_5 n_5 port_c_1 n_8 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos6_6 n_8 n_4 port_q_9 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos8_7 n_10 n_8 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos9_8 port_q_9 n_10 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_9 n_4 port_c_1 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos2_10 port_d_0 port_c_1 n_6 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos3_11 n_6 n_4 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos4_12 n_7 n_6 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos5_13 n_5 n_7 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos6_14 port_q_9 port_c_1 n_8 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos7_15 n_8 n_4 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos8_16 n_10 n_8 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos9_17 port_q_9 n_10 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+.ends
+
+.subckt out port_out_14 port_dst_1 port_s_0 port_d_2 port_kdr_9 
+x_dd11 port_out_14 n_13 buf 
+x_dd9 n_12 n_7 n_10 and2 
+x_dd1 n_4 port_dst_1 not 
+x_dd3 n_6 port_s_0 n_4 or2 
+x_dd4 n_5 n_4 n_3 or2 
+x_dd6 n_11 n_5 n_7 or2 
+x_dd8 n_7 port_kdr_9 n_11 or2 
+x_dd7 n_8 port_kdr_9 n_10 or2 
+x_dd5 n_10 n_6 n_8 or2 
+x_dd2 n_3 port_d_2 not 
+x_dd10 n_13 port_kdr_9 n_12 dt 
+.ends
+
+.subckt not1 port_q_2 port_x_0 
+m_pmos1_0 port_q_2 port_x_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=5e-006  
+m_nmos1_1 port_q_2 port_x_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=1.8e-006  
+.ends
+
+.subckt del1 port_q_3 port_x_0 
+r_res1_0 n_1 port_x_0 rpl_rt r=20000 
+c_cap1_1 port_q_3 n_1 mim_main c=1.5e-013 
+x_dd1 n_2 n_1 not 
+x_dd2 port_q_3 n_2 not 
+.ends
+
+.subckt dig2 port_f2_22 port_st1_2 port_st2_34 port_s1_32 port_s2_33 port_f1_18 port_dst_36 port_kdr_30 port_rd0_0 port_c_1 port_a0_9 
+x_dd3 n_7 port_c_1 del1 
+x_dd1 n_6 port_rd0_0 not 
+x_dd6 n_12 n_7 n_11 tr1 
+x_dd7 n_16 n_12 not 
+x_dd12 port_f2_22 n_16 buf1 
+x_dd2 n_5 port_c_1 port_rd0_0 dt 
+x_dd5 n_15 n_3 port_c_1 ctr1 
+x_dd10 n_11 n_15 buf 
+x_dd8 n_20 n_7 not 
+x_dd14 n_29 n_19 n_20 and2 
+x_dd18 port_st2_34 n_29 buf1 
+x_dd17 port_st1_2 n_26 buf1 
+x_dd13 n_26 n_20 n_11 and2 
+x_dd11 port_f1_18 n_12 buf1 
+x_dd19 port_s1_32 n_27 buf 
+x_dd16 n_28 port_f1_18 n_11 or2 
+x_dd15 n_27 port_f2_22 n_19 or2 
+x_dd20 port_s2_33 n_28 buf 
+x_dd9 n_19 n_15 not 
+x_dd24 n_17 n_13 n_3 ctr 
+x_dd21 n_4 port_st1_2 n_3 ctr 
+x_dd28 n_21 n_31 not 
+x_dd29 n_35 n_21 port_st2_34 or2 
+x_dd30 port_dst_36 n_35 buf 
+x_dd25 n_23 n_17 not 
+x_dd27 n_31 n_25 n_3 ctr 
+x_dd26 n_25 n_23 n_3 ctr 
+x_dd23 n_13 n_8 n_3 ctr 
+x_dd22 n_8 n_4 not 
+x_dd34 port_kdr_30 n_24 not1 
+x_dd33 n_24 n_10 n_21 and2 
+x_dd32 n_10 port_rd0_0 n_14 or2 
+x_dd31 n_14 n_10 port_a0_9 or2 
+x_dd4 n_3 n_5 n_6 or2 
+.ends
+
+.subckt ctr port_q_10 port_c_0 port_r_8 
+m_nmos1_0 n_3 port_c_0 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos7_1 n_4 port_c_0 n_5 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_2 n_5 n_3 n_6 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos3_3 n_7 n_5 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos8_4 n_4 n_7 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos9_5 n_4 port_r_8 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos5_6 n_4 port_c_0 n_11 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos6_7 n_6 n_11 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos10_8 port_q_10 n_6 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos11_9 port_q_10 port_r_8 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos1_10 n_3 port_c_0 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos2_11 n_6 port_c_0 n_5 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos7_12 n_5 n_3 n_4 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos5_13 n_7 n_5 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos8_14 n_9 port_r_8 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos9_15 n_4 n_7 n_9 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos3_16 port_q_10 port_c_0 n_11 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos4_17 n_11 n_3 n_4 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos6_18 n_6 n_11 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos10_19 n_12 port_r_8 g_vdd! g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_pmos11_20 port_q_10 n_6 n_12 g_vdd! pmos_tkt2 l=2.4e-007 w=1.5e-006  
+m_nmos4_21 n_11 n_3 port_q_10 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+.ends
+
+.subckt ref1 port_1_19 port_6_20 port_5_18 port_4_16 port_3_13 port_2_10 
+m_pmos1_0 n_2 n_6 g_vda! g_vda! pmos_tkt2 l=2e-006 w=6e-007  
+m_pmos3_1 n_6 n_6 g_vda! g_vda! pmos_tkt2 l=2e-006 w=6e-007  
+m_pmos4_2 n_5 n_5 n_6 g_vda! pmos_tkt2 l=2e-006 w=6e-007  
+m_nmos2_3 n_5 n_4 n_8 gnd! nmos_tkt2 l=7.3e-006 w=3e-007 ad=4e-013 as=4e-013  
+m_nmos4_4 n_8 n_4 n_9 gnd! nmos_tkt2 l=7.3e-006 w=3e-007 ad=4e-013 as=4e-013  
+m_nmos1_5 n_4 n_4 n_3 gnd! nmos_tkt2 l=2.4e-007 w=1e-005  
+m_pmos6_6 port_2_10 n_5 n_11 g_vda! pmos_tkt2 l=2e-006 w=1.3e-006  
+m_pmos5_7 n_11 n_6 g_vda! g_vda! pmos_tkt2 l=2e-006 w=1.3e-006  
+m_pmos7_8 n_15 n_6 g_vda! g_vda! pmos_tkt2 l=2e-006 w=1.3e-006  
+m_pmos8_9 port_3_13 n_5 n_15 g_vda! pmos_tkt2 l=2e-006 w=1.3e-006  
+m_nmos5_10 n_12 port_2_10 gnd! gnd! nmos_tkt2 l=3e-006 w=6e-007  
+m_nmos3_11 port_2_10 port_3_13 n_12 gnd! nmos_tkt2 l=3e-006 w=6e-007  
+m_nmos6_12 port_4_16 port_3_13 n_17 gnd! nmos_tkt2 l=3e-006 w=6e-007  
+m_nmos7_13 n_17 port_2_10 gnd! gnd! nmos_tkt2 l=3e-006 w=6e-007  
+m_nmos9_14 port_1_19 port_2_10 gnd! gnd! nmos_tkt2 l=3e-006 w=6e-007  
+m_nmos8_15 port_5_18 port_3_13 port_1_19 gnd! nmos_tkt2 l=3e-006 w=6e-007  
+m_nmos12_16 n_14 port_3_13 gnd! gnd! nmos_tkt2 l=9.5e-006 w=6e-007  
+m_nmos11_17 port_3_13 port_3_13 n_14 gnd! nmos_tkt2 l=9.5e-006 w=6e-007  
+m_pmos11_18 port_5_18 port_4_16 port_6_20 g_vda! pmos_tkt2 l=1.2e-006 w=6e-007  
+m_pmos10_19 port_6_20 port_5_18 g_vda! g_vda! pmos_tkt2 l=1.2e-006 w=6e-007  
+m_pmos9_20 port_4_16 port_4_16 g_vda! g_vda! pmos_tkt2 l=7.5e-006 w=6e-007  
+m_nmos10_21 n_9 n_4 n_7 gnd! nmos_tkt2 l=7.3e-006 w=3e-007 ad=4e-013 as=4e-013  
+m_nmos13_22 n_7 n_4 gnd! gnd! nmos_tkt2 l=7.3e-006 w=3e-007 ad=4e-013 as=4e-013  
+q_pnp1_23 gnd! gnd! n_3 gnd! vpnp1  
+m_pmos2_24 n_4 n_5 n_2 g_vda! pmos_tkt2 l=2e-006 w=6e-007  
+.ends
+
+.subckt oe1 port_q_12 port_x_4 
+m_pmos2_0 n_10 n_10 g_vda! g_vda! pmos_tkt2 l=3e-007 w=6e-006  
+m_pmos1_1 n_8 n_10 g_vda! g_vda! pmos_tkt2 l=3e-007 w=6e-006  
+m_pmos3_2 n_14 n_8 g_vda! g_vda! pmos_tkt2 l=3e-007 w=1e-005 m=5  
+m_pmos4_3 port_q_12 n_16 n_14 g_vda! pmos_tkt2 l=3e-007 w=1e-005 m=5  
+m_nmos4_4 n_11 n_7 gnd! gnd! nmos_tkt2 l=5e-007 w=6.8e-006 m=2  
+m_nmos3_5 n_6 n_5 n_11 gnd! nmos_tkt2 l=5e-007 w=6.8e-006 m=2  
+m_nmos2_6 n_10 port_q_12 n_6 gnd! nmos_tkt2 l=2.4e-007 w=1e-005 m=5  
+m_nmos6_7 n_15 n_7 gnd! gnd! nmos_tkt2 l=5e-007 w=5.4e-006 m=10  
+m_nmos5_8 port_q_12 n_5 n_15 gnd! nmos_tkt2 l=5e-007 w=5.4e-006 m=10  
+c_cap1_9 n_13 n_8 mim_main c=4.4e-013 
+r_res1_10 port_q_12 n_13 rpl_rt r=3240 
+m_nmos1_11 n_8 port_x_4 n_6 gnd! nmos_tkt2 l=2.4e-007 w=1e-005 m=5  
+x_a1 n_1 n_2 n_3 n_16 n_5 n_7 ref1 
+.ends
+
+.subckt oyn port_i_minus_13 port_q_14 port_v5_2 port_v4_1 port_i_plus_0 port_v3_4 port_v2_3 
+c_cap1_0 port_q_14 port_i_minus_13 mim_main c=1.5e-013 
+c_cap2_1 port_q_14 n_7 mim_main c=5e-014 
+m_pmos2_2 n_12 port_v5_2 g_vda! g_vda! pmos_tkt2 l=5e-007 w=3.5e-006  
+m_pmos4_3 port_q_14 port_v4_1 n_12 g_vda! pmos_tkt2 l=5e-007 w=3.5e-006  
+m_nmos3_4 n_7 port_v3_4 n_8 gnd! nmos_tkt2 l=5e-007 w=1.2e-006  
+m_nmos4_5 port_q_14 port_v3_4 n_15 gnd! nmos_tkt2 l=5e-007 w=1.2e-006  
+m_nmos7_6 n_15 n_7 gnd! gnd! nmos_tkt2 l=5e-007 w=1.2e-006  
+m_nmos6_7 n_11 port_v2_3 gnd! gnd! nmos_tkt2 l=5e-007 w=2.6e-006  
+m_nmos5_8 n_10 port_v3_4 n_11 gnd! nmos_tkt2 l=5e-007 w=2.6e-006  
+m_nmos8_9 n_8 n_7 gnd! gnd! nmos_tkt2 l=5e-007 w=1.2e-006  
+m_pmos3_10 n_7 port_v4_1 n_9 g_vda! pmos_tkt2 l=5e-007 w=3.5e-006  
+m_pmos1_11 n_9 port_v5_2 g_vda! g_vda! pmos_tkt2 l=5e-007 w=3.5e-006  
+m_nmos2_12 n_12 port_i_minus_13 n_10 gnd! nmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_nmos1_13 n_9 port_i_plus_0 n_10 gnd! nmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+.ends
+
+.subckt oyp port_q_13 port_i_minus_14 port_v5_2 port_v4_4 port_i_plus_0 port_v3_1 port_v2_3 
+c_cap1_0 n_7 port_q_13 mim_main c=2e-014 
+m_nmos3_1 n_8 port_v2_3 gnd! gnd! nmos_tkt2 l=5e-007 w=2.6e-006  
+m_nmos4_2 n_12 port_v2_3 gnd! gnd! nmos_tkt2 l=5e-007 w=2.6e-006  
+m_nmos1_3 n_7 port_v3_1 n_8 gnd! nmos_tkt2 l=5e-007 w=2.6e-006  
+m_nmos2_4 port_q_13 port_v3_1 n_12 gnd! nmos_tkt2 l=5e-007 w=2.6e-006  
+m_pmos3_5 n_7 port_v4_4 n_9 g_vda! pmos_tkt2 l=5e-007 w=1e-006  
+m_pmos4_6 port_q_13 port_v4_4 n_15 g_vda! pmos_tkt2 l=5e-007 w=1e-006  
+m_pmos6_7 n_15 n_7 g_vda! g_vda! pmos_tkt2 l=5e-007 w=1e-006  
+m_pmos5_8 n_9 n_7 g_vda! g_vda! pmos_tkt2 l=5e-007 w=1e-006  
+m_pmos7_9 n_11 port_v5_2 g_vda! g_vda! pmos_tkt2 l=5e-007 w=3.6e-006  
+m_pmos1_10 n_8 port_i_plus_0 n_10 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_pmos2_11 n_12 port_i_minus_14 n_10 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_pmos8_12 n_10 port_v4_4 n_11 g_vda! pmos_tkt2 l=5e-007 w=3.6e-006  
+.ends
+
+.subckt oy2_adc_ port_q_11 port_x_6 
+m_nmos2_0 port_q_11 n_7 n_10 gnd! nmos_tkt2 l=5e-007 w=1e-005 m=4  
+m_nmos1_1 n_10 port_x_6 gnd! gnd! nmos_tkt2 l=4.5e-007 w=1e-005 m=4  
+m_pmos1_2 n_9 n_2 g_vda! g_vda! pmos_tkt2 l=5e-007 w=6.5e-006 m=10  
+m_pmos2_3 port_q_11 n_8 n_9 g_vda! pmos_tkt2 l=5e-007 w=6.5e-006 m=10  
+x_a3 n_5 n_4 n_2 n_1 n_3 n_0 ref1 
+x_a1 n_9 n_8 n_2 n_1 n_4 n_3 n_0 oyn 
+x_a2 n_7 n_10 n_2 n_1 n_5 n_3 n_0 oyp 
+.ends
+
+.subckt cmp2 port_ql_51 port_qh_46 port_in_20 port_st_40 
+m_pmos1_0 n_3 n_6 n_2 g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos4_1 n_6 n_6 n_5 g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos3_2 n_5 n_5 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos2_3 n_2 n_5 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos29_4 n_7 n_7 g_vda! g_vda! pmos_tkt2 l=4e-006 w=6e-007  
+m_nmos11_5 n_3 n_3 n_4 gnd! nmos_tkt2 l=2.4e-007 w=1e-005  
+m_nmos9_6 n_6 n_3 gnd! gnd! nmos_tkt2 l=1e-005 w=3e-007 ad=4e-013 as=4e-013  
+m_nmos10_7 n_7 n_3 gnd! gnd! nmos_tkt2 l=1e-005 w=3e-007 ad=4e-013 as=4e-013  
+m_pmos22_8 n_12 n_5 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=1.3e-006  
+m_pmos21_9 n_9 n_7 n_12 g_vda! pmos_tkt2 l=2.4e-007 w=1.3e-006  
+m_pmos20_10 n_22 n_5 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=1.3e-006  
+m_pmos19_11 n_18 n_7 n_22 g_vda! pmos_tkt2 l=2.4e-007 w=1.3e-006  
+m_pmos23_12 n_18 n_7 n_25 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos24_13 n_25 n_5 n_24 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos25_14 n_24 n_27 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos26_15 n_9 n_7 n_15 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos27_16 n_15 n_5 n_14 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_nmos1_17 n_10 n_11 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos2_18 n_11 n_10 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos5_19 n_17 n_21 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos6_20 n_21 n_17 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos12_21 n_11 n_16 n_10 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos13_22 n_21 n_26 n_17 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos7_23 n_34 n_21 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos8_24 n_36 n_17 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos4_25 n_31 n_10 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_nmos3_26 n_28 n_11 gnd! gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos11_27 n_34 n_36 n_35 g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos12_28 n_36 n_34 n_35 g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos10_29 n_31 n_28 n_29 g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos9_30 n_28 n_31 n_29 g_vda! pmos_tkt2 l=2.4e-007 w=6e-007  
+m_pmos18_31 n_35 n_7 n_38 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos17_32 n_38 n_5 n_37 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos16_33 n_37 n_27 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos13_34 n_29 n_7 n_33 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos14_35 n_33 n_5 n_32 g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos15_36 n_32 n_19 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+m_pmos5_37 n_10 g_vh! n_9 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_pmos6_38 n_11 port_in_20 n_9 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_pmos7_39 n_17 g_vl! n_18 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_pmos8_40 n_21 port_in_20 n_18 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005 m=2  
+m_pmos28_41 n_14 n_19 g_vda! g_vda! pmos_tkt2 l=2.4e-007 w=7e-006  
+q_pnp1_42 gnd! gnd! n_4 gnd! vpnp1  
+x_dd14 n_49 n_48 n_27 n_36 rst 
+x_dd1 n_43 n_42 n_19 n_31 rst 
+x_dd4 n_42 port_st_40 not 
+x_dd2 n_39 n_43 n_41 or2 
+x_dd3 n_19 n_39 port_st_40 and2 
+x_dd17 n_26 n_30 not 
+x_dd16 n_30 n_27 not 
+x_dd13 n_44 n_49 n_47 or2 
+x_dd12 n_27 n_44 port_st_40 and2 
+x_dd11 n_48 port_st_40 not 
+x_dd10 n_47 n_48 n_27 n_34 rst 
+x_dd9 n_50 n_47 port_ql_51 or2 
+x_dd8 port_ql_51 n_49 n_50 or2 
+x_dd18 n_16 n_23 not 
+x_dd15 n_23 n_19 not 
+x_dd6 n_45 n_41 port_qh_46 or2 
+x_dd7 port_qh_46 n_43 n_45 or2 
+x_dd5 n_41 n_42 n_19 n_28 rst 
+.ends
+
+.subckt sha port_l_19 port_q_16 port_s_15 port_x_0 port_f1_5 port_f2_10 port_h_18 port_st_14 
+c_cap2_0 n_17 n_13 mim_main c=2.5e-013 
+c_cap4_1 n_4 n_13 mim_main c=2.5e-013 
+c_cap1_2 n_3 n_13 mim_main c=2.5e-013 
+m_pmos1_3 g_rfh! n_11 n_4 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005  
+m_pmos2_4 n_4 port_f2_10 port_x_0 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005  
+m_pmos3_5 port_x_0 port_f2_10 n_3 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005  
+m_pmos4_6 n_3 n_12 g_rfh! g_vda! pmos_tkt2 l=2.4e-007 w=1e-005  
+m_pmos5_7 n_17 port_f2_10 port_x_0 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005  
+m_pmos6_8 port_q_16 port_f1_5 n_17 g_vda! pmos_tkt2 l=2.4e-007 w=1e-005  
+m_nmos5_9 port_x_0 port_f1_5 n_17 gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos1_10 g_rfl! n_7 n_3 gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos2_11 n_3 port_f1_5 port_x_0 gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos3_12 port_x_0 port_f1_5 n_4 gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos4_13 n_4 n_6 g_rfl! gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos6_14 n_17 port_f2_10 port_q_16 gnd! nmos_tkt2 l=2.4e-007 w=3e-006  
+m_nmos7_15 n_13 port_s_15 port_q_16 gnd! nmos_tkt2 l=2.4e-007 w=6e-007  
+c_cap3_16 n_17 n_13 mim_main c=2.5e-013 
+x_dd2 n_12 port_l_19 port_f2_10 and2 
+x_dd1 n_7 port_l_19 port_f1_5 or2 
+x_dd5 port_l_19 port_h_18 port_x_0 port_st_14 cmp2 
+x_dd4 n_6 port_h_18 port_f1_5 or2 
+x_dd3 n_11 port_h_18 port_f2_10 and2 
+x_da1 port_q_16 n_13 oy2_adc_ 
+.ends
+
+.subckt sum port_s_11 port_c_10 port_a_1 port_b_0 port_p_6 
+x_dd1 n_3 port_b_0 port_a_1 and2 
+x_dd2 n_2 port_b_0 port_a_1 or2 
+x_dd3 n_4 n_3 not 
+x_dd4 n_5 n_2 n_4 or2 
+x_dd5 n_7 port_p_6 n_5 and2 
+x_dd6 n_8 port_p_6 n_5 or2 
+x_dd7 n_9 n_7 not 
+x_dd8 port_c_10 n_7 n_3 and2 
+x_dd9 port_s_11 n_8 n_9 or2 
+.ends
+
+.subckt adc_1 port_q0_13 port_q1_36 port_q2_48 port_a0_6 port_c_4 port_rd0_1 port_kdr_0 port_dst_3 port_in_2 port_qp_5 
+x_da0 n_24 port_in_2 oe1 
+x_dd3 n_20 n_26 n_29 n_35 lg2 
+x_dd5 n_32 n_7 n_26 tr1 
+x_dd14 n_23 n_7 n_20 tr1 
+x_dd6 n_17 n_23 n_18 xor2 
+x_dd4 n_18 n_25 n_31 n_32 ssum 
+x_dd8 n_31 n_37 n_40 n_45 ssum 
+x_dd13 n_19 n_10 n_17 tr1 
+x_dd15 n_43 n_10 n_37 tr1 
+x_da2 n_40 n_41 n_9 n_28 n_12 n_11 n_45 n_7 sha 
+x_da3 n_49 n_50 n_41 n_10 cmp2 
+x_dd7 port_qp_5 port_dst_3 n_14 port_q0_13 port_kdr_0 out 
+x_dd86 n_21 n_14 n_16 n_15 lg3 
+x_dd64 n_15 n_19 n_22 xor2 
+x_dd76 n_34 n_10 n_27 tr1 
+x_dd68 n_27 n_16 n_21 n_14 lg1 
+x_dd77 port_q0_13 n_34 buf 
+x_dd65 n_22 n_16 n_33 n_30 ssum 
+x_dd16 n_42 n_10 n_38 tr1 
+x_dd17 n_38 n_39 n_21 n_14 lg1 
+x_dd18 n_33 n_39 n_44 n_43 ssum 
+x_dd19 port_q1_36 n_42 buf 
+x_dd1 n_46 n_44 n_49 n_50 g_vdd! sum 
+x_dd10 n_52 n_10 n_47 tr1 
+x_dd11 port_q2_48 n_52 buf 
+x_dd12 n_47 n_46 n_21 n_14 lg1 
+x_da1 n_29 n_28 n_8 n_24 n_11 n_12 n_35 n_10 sha 
+x_dd2 n_12 n_10 n_7 n_8 n_9 n_11 port_dst_3 port_kdr_0 port_rd0_1 port_c_4 port_a0_6 dig2 
+x_dd9 n_30 n_10 n_25 tr1 
+.ends

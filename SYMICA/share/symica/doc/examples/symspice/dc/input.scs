@@ -1,0 +1,15 @@
+*******************************************************************
+*** This is a root file of the project
+*******************************************************************
+
+simulator lang=spectre
+
+global gnd 
+
+
+model default_npn_0 bjt type=npn 
+model default_1 resistor 
+
+include "input.net"
+include "input.sim"
+

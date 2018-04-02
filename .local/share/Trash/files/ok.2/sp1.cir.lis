@@ -1,0 +1,81 @@
+
+***** SymSpice --- v3.1.0.0209 *****
+
+Job started at	20.11.26   15/10/2017.
+
+Loading file: '/home/olya/SYMICA/share/symica/spice.ini'. Please wait...                                                                             (20:11:27)
+Loading file: '/home/olya/u120105/spice/1/sp1.cir'. Please wait...   (20:11:27)
+
+Netlist summary (root)                                              (20:11:27)
+
+  Nodes   	3
+  Elements	3
+
+Multithreading
+	Number of used threads		: 1
+	Maximum number of threads	: 1
+
+Start creating models...
+
+
+Circuit summary
+	Equations : 3
+	Elements  : 3
+
+	Type info
+	   Vpulse : 1    
+	 Resistor : 1     (part types : 1)
+	Capacitor : 1     (part types : 1)
+
+Total time of model creation: 0s  (CPU time 0.000s).
+
+----------------------------------------------
+
+Simulation started:	20.11.27   15/10/2017.
+
+Parameter values:
+	start = 0 s
+	outputstart = 0 s
+	stop = 1e-07 s
+	step = 1e-09 s
+	maxstep = 2e-09 s
+	skipdc = no
+	reltol = 0.001
+	abstol(I) = 1e-12
+	abstol(V) = 1e-06
+	temp = 25 C
+	tnom = 25 C
+	method = traponly
+	lteratio = 3.5
+	gmin = 1e-12
+	fast_spice = 0
+
+Operating point calculation started...
+Total time required for op. point calculation 0s  (CPU time 0.000s).
+
+Transient analysis started...
+
+tran: time = 0s.                                                     (20:11:27)
+tran: time = 1e-08s.                                                 (20:11:27)
+tran: time = 2e-08s.                                                 (20:11:27)
+tran: time = 3e-08s.                                                 (20:11:27)
+tran: time = 4e-08s.                                                 (20:11:27)
+tran: time = 5e-08s.                                                 (20:11:27)
+tran: time = 6e-08s.                                                 (20:11:27)
+tran: time = 7e-08s.                                                 (20:11:27)
+tran: time = 8e-08s.                                                 (20:11:27)
+tran: time = 9e-08s.                                                 (20:11:27)
+tran: time = 1e-07s.                                                 (20:11:27)
+Number of tran steps = 125
+
+Simulation finished:	20.11.27   15/10/2017.
+
+Simulation time summary:
+Operating point = 0s  (CPU time 0.000s)
+Transient analysis = 0s  (CPU time 0.002s)
+
+
+Job ended at	20.11.27   15/10/2017.
+
+Job time summary:
+Total time used = 1s  (CPU time 0.154s)

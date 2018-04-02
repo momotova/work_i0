@@ -1,0 +1,13 @@
+
+simulator lang=spectre
+
+parameters ress=100 
+
+q_q2_0 n_4 n_4 n_2 gnd default_npn_0 
+q_q3_1 n_3 n_4 n_1 gnd default_npn_0 
+q_q1_2 nv_2 n_3 n_4 gnd default_npn_0 
+r_res3_3 n_3 nv_1 default_1 r=1000 
+v_vdc1_4 nv_1 gnd vsource type=dc dc=5 
+v_vdc2_5 nv_2 gnd vsource type=dc dc=0 
+r_res1_6 gnd n_1 default_1 r=ress 
+r_res2_7 gnd n_2 default_1 r=ress 

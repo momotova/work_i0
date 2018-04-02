@@ -1,0 +1,13 @@
+*** Title:
+
+.op
+.tran 5.000000e-008 5.000000e-006 start=0.000000e+000
+ 
+.probe tran v(nv_6) v(nv_7) v(nv_8) v(nv_9) v(n_3) v(n_4) v(n_5) v(n_498) v(n_9) 
+
+.options probe
+
+.temp 2.500000e+001
+
+.options apb=1
+
