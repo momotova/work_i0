@@ -62,15 +62,16 @@
   </div>
 </body>
 </html>
-L®¦\f      ZÂ{9ZÂ{9>èï-           :http://localhost:3000/ strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
+üEšf      
+ZÃðÍZÃðÍ>ì$@           :http://localhost:3000/ strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
 ETag: W/"853d69945e1dc1b93cd5322241053c03"
+X-Request-Id: 30f36dbd-bf27-42f3-abbd-827217d8b78a
+X-Runtime: 0.069430
 X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 3481c20f-2d61-4057-b4c4-ba530978b861
-X-Runtime: 0.597445
  original-response-headers X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
