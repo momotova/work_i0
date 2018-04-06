@@ -1,6 +1,48 @@
 {
   "data": [
     {
+      "guid": "adbeaver@adbeaver.org",
+      "prefs": [],
+      "schema": 1521630548030,
+      "details": {
+        "bug": "https://bugzilla.mozilla.org/show_bug.cgi?id=1445031",
+        "why": "This add-on generates numerous errors when loading Facebook, caused by ad injection included in it. Users who want to continue using this add-on can enable it in the Add-ons Manager.",
+        "name": "AdBeaver"
+      },
+      "enabled": true,
+      "versionRange": [
+        {
+          "severity": 1,
+          "maxVersion": "*",
+          "minVersion": "0"
+        }
+      ],
+      "id": "baf7f735-d6b6-410a-8cc8-25c60f7c57e2",
+      "last_modified": 1522103097333,
+      "_status": "synced"
+    },
+    {
+      "guid": "{44685ba6-68b3-4895-879e-4efa29dfb578}",
+      "prefs": [],
+      "schema": 1521565140013,
+      "details": {
+        "bug": "https://bugzilla.mozilla.org/show_bug.cgi?id=1447042",
+        "why": "This add-on impersonates a Flash tool and runs remote code on users' systems.",
+        "name": "FF Flash Manager"
+      },
+      "enabled": true,
+      "versionRange": [
+        {
+          "severity": 3,
+          "maxVersion": "*",
+          "minVersion": "0"
+        }
+      ],
+      "id": "547037f2-97ae-435a-863c-efd7532668cd",
+      "last_modified": 1521630548023,
+      "_status": "synced"
+    },
+    {
       "guid": "/^.*extension.*@asdf\\.pl$/",
       "prefs": [],
       "schema": 1520451695869,

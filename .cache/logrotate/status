@@ -1,18 +1,19 @@
 logrotate state -- version 2
-"/home/olya/.cache/upstart/unity7.log" 2018-4-5-7:35:12
 "/home/olya/.cache/upstart/unity-settings-daemon.log" 2018-4-1-7:35:26
+"/home/olya/.cache/upstart/unity7.log" 2018-4-5-7:35:12
 "/home/olya/.cache/upstart/upstart-event-bridge.log" 2018-4-1-7:35:26
 "/home/olya/.cache/upstart/*.log" 2018-3-12-20:0:0
 "/home/olya/.cache/upstart/indicator-sound.log" 2018-4-1-7:35:26
 "/home/olya/.cache/upstart/update-notifier-crash-_var_crash__usr_bin_nautilus.1000.crash.log" 2018-3-12-20:49:52
 "/home/olya/.cache/upstart/gnome-keyring-ssh.log" 2018-4-1-7:35:26
-"/home/olya/.cache/upstart/unity-panel-service.log" 2018-4-5-7:35:12
-"/home/olya/.cache/upstart/dbus.log" 2018-4-3-7:35:10
+"/home/olya/.cache/upstart/unity-panel-service.log" 2018-4-6-7:35:11
+"/home/olya/.cache/upstart/dbus.log" 2018-4-6-7:35:11
 "/home/olya/.cache/upstart/update-notifier-cds.log" 2017-10-15-18:19:51
-"/home/olya/.cache/upstart/unity-panel-service-lockscreen.log" 2018-4-1-7:35:26
-"/home/olya/.cache/upstart/bamfdaemon.log" 2018-4-1-7:35:26
-"/home/olya/.cache/upstart/ssh-agent.log" 2018-4-1-7:35:26
+"/home/olya/.cache/upstart/indicator-printers.log" 2018-4-6-7:0:0
 "/home/olya/.cache/upstart/update-notifier-crash-_var_crash__usr_lib_i386-linux-gnu_hud_hud-service.1000.crash.log" 2018-4-1-7:35:26
+"/home/olya/.cache/upstart/ssh-agent.log" 2018-4-1-7:35:26
+"/home/olya/.cache/upstart/bamfdaemon.log" 2018-4-1-7:35:26
+"/home/olya/.cache/upstart/unity-panel-service-lockscreen.log" 2018-4-1-7:35:26
 "/home/olya/.cache/upstart/window-stack-bridge.log" 2018-4-1-7:35:26
 "/home/olya/.cache/upstart/update-notifier-release.log" 2018-4-1-7:35:26
 "/home/olya/.cache/upstart/gpg-agent.log" 2018-4-1-7:35:26

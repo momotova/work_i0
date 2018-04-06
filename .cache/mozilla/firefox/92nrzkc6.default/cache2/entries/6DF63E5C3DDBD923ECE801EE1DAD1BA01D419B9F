@@ -163,12 +163,12 @@ V   5   : ™–€ 
  S u p p r e s s   t h i s   w a r n i n g   b y   a d d i n g   a   ` d a t a - t u r b o l i n k s - s u p p r e s s - w a r n i n g `   a t t r i b u t e   t o :   % s    outerHTML   parentNodeŒ!«!ÿÿÿÿ      t   e         «+’Hš˜;ø    :   I          Ê5žš˜;øÊ5ž!«!       C   S                                           €   È  ^’  À  ^’                    š    ‚    6   Q‚   ‰   Q‚   ‰   Q‚   ‰   Qˆ   :  E   æQš    ¸   
 :  æQ™€ ’Ð€  ˆËQËdË4Ü•    Turbolinks   startŒ!«!ÿÿÿÿ      t   e   r         «+’H!«!       !   Turbolinks.startc   V                                           €  î  \‘  æ  \‘     ±             ˆ   :  G   æ@š    5   E   æQš    ˆ   :  6   æQš    5   ¸   
 :     æ>(æ™€ ´–B–Þ4ÊÚ“    Turbolinks   controller   startŒ!«!ÿÿÿÿ              «+’Hš˜;ø       Ê5ž!«!          eC  /                                           €  g‘  ­‘  _‘  ­‘     *             @š    5   E   æQš    š   6   æQˆ   :  ™€ -ä8É    window   TurbolinksŒ!«!ÿÿÿÿ              «+’Hš˜;ø       Ê5ž!«!          tC  =                                           €  ¸‘  ’  °‘  ’     {            š    5   A,  R  W   QV   š    5   AV   ,  R 6   QV   ™€ ‚ÏÈ×
-É!”    Turbolinks   Controller   adapter   BrowserAdapterŒ!«!ÿÿÿÿ      t         «+’Hš˜;ø       Ê5ž!«!          rC            	                                 €  ’  E’  ’  E’     ß             š    5   š   H™€ âÐ%    window   TurbolinksŒ!«!ÿÿÿÿ              «+’Hš˜;ø       Ê5žš˜;øÊ5žš˜;ø3Z‚r¨      #ZÆ^ZÆ•>ï¿\§³   x    :http://localhost:3000/assets/turbolinks.self-2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128.js?body=1 necko:classified 1 strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
+É!”    Turbolinks   Controller   adapter   BrowserAdapterŒ!«!ÿÿÿÿ      t         «+’Hš˜;ø       Ê5ž!«!          rC            	                                 €  ’  E’  ’  E’     ß             š    5   š   H™€ âÐ%    window   TurbolinksŒ!«!ÿÿÿÿ              «+’Hš˜;ø       Ê5žš˜;øÊ5žš˜;ø{-å~r¨      'ZÇÝ@ZÇÛM>ð+ß\©Ì   x    :http://localhost:3000/assets/turbolinks.self-2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128.js?body=1 necko:classified 1 strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
 Content-Type: application/javascript
 ETag: "2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128"
 Content-Length: 37484
-X-Request-Id: 6db37826-769d-45bb-8e5d-f792d63abb96
-X-Runtime: 0.003790
+X-Request-Id: a7a3237c-1e71-4e49-b339-f01cdc43793a
+X-Runtime: 0.016433
 Cache-Control: public, max-age=31536000
  original-response-headers Content-Type: application/javascript
 Cache-Control: public, max-age=31536000
