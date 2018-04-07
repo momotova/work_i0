@@ -101,7 +101,7 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="file:///home/olya/blogger/app/models/article.rb" added="2018-04-02T17:54:23Z" modified="2018-04-02T17:54:33Z" visited="2018-04-02T17:54:23Z">
+  <bookmark href="file:///home/olya/blogger/app/models/article.rb" added="2018-04-02T17:54:23Z" modified="2018-04-06T21:08:30Z" visited="2018-04-02T17:54:23Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="application/x-ruby"/>
@@ -109,13 +109,13 @@
           <bookmark:group>gedit</bookmark:group>
         </bookmark:groups>
         <bookmark:applications>
-          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-02T17:54:23Z" count="1"/>
-          <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-02T17:54:33Z" count="2"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-06T21:08:30Z" count="2"/>
+          <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-06T21:08:11Z" count="3"/>
         </bookmark:applications>
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="file:///home/olya/blogger/config/routes.rb" added="2018-04-02T18:37:42Z" modified="2018-04-05T20:07:31Z" visited="2018-04-02T18:37:42Z">
+  <bookmark href="file:///home/olya/blogger/config/routes.rb" added="2018-04-02T18:37:42Z" modified="2018-04-07T10:47:59Z" visited="2018-04-02T18:37:42Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="application/x-ruby"/>
@@ -123,13 +123,13 @@
           <bookmark:group>gedit</bookmark:group>
         </bookmark:groups>
         <bookmark:applications>
-          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-05T20:07:31Z" count="4"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T10:47:59Z" count="7"/>
           <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-05T20:07:11Z" count="1"/>
         </bookmark:applications>
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="file:///home/olya/blogger/app/controllers/articles_controller.rb" added="2018-04-02T18:44:55Z" modified="2018-04-06T20:48:41Z" visited="2018-04-02T18:44:56Z">
+  <bookmark href="file:///home/olya/blogger/app/controllers/articles_controller.rb" added="2018-04-02T18:44:55Z" modified="2018-04-07T11:00:41Z" visited="2018-04-02T18:44:56Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="application/x-ruby"/>
@@ -137,7 +137,7 @@
           <bookmark:group>gedit</bookmark:group>
         </bookmark:groups>
         <bookmark:applications>
-          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-06T20:48:41Z" count="45"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T11:00:41Z" count="48"/>
           <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-03T20:10:55Z" count="5"/>
         </bookmark:applications>
       </metadata>
@@ -170,15 +170,15 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="file:///home/olya/blogger/app/views/articles/show.html.erb" added="2018-04-02T19:07:27Z" modified="2018-04-05T19:37:00Z" visited="2018-04-02T19:07:27Z">
+  <bookmark href="file:///home/olya/blogger/app/views/articles/show.html.erb" added="2018-04-02T19:07:27Z" modified="2018-04-07T11:12:09Z" visited="2018-04-02T19:07:27Z">
     <info>
       <metadata owner="http://freedesktop.org">
-        <mime:mime-type type="text/html"/>
+        <mime:mime-type type="text/plain"/>
         <bookmark:groups>
           <bookmark:group>gedit</bookmark:group>
         </bookmark:groups>
         <bookmark:applications>
-          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-05T19:37:00Z" count="14"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T11:12:09Z" count="25"/>
           <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-03T21:11:10Z" count="2"/>
         </bookmark:applications>
       </metadata>
@@ -251,7 +251,7 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="file:///home/olya/blogger/app/views/articles/_form.html.erb" added="2018-04-05T19:50:52Z" modified="2018-04-05T19:53:24Z" visited="2018-04-05T19:50:52Z">
+  <bookmark href="file:///home/olya/blogger/app/views/articles/_form.html.erb" added="2018-04-05T19:50:52Z" modified="2018-04-07T11:03:43Z" visited="2018-04-05T19:50:52Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="text/plain"/>
@@ -259,7 +259,7 @@
           <bookmark:group>gedit</bookmark:group>
         </bookmark:groups>
         <bookmark:applications>
-          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-05T19:53:24Z" count="3"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T11:03:43Z" count="6"/>
         </bookmark:applications>
       </metadata>
     </info>
@@ -288,6 +288,73 @@
         <bookmark:applications>
           <bookmark:application name="nautilus" exec="&apos;firefox %u&apos;" modified="2018-04-05T20:03:32Z" count="1"/>
           <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-05T20:04:38Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/olya/blogger/db/migrate/20180406205220_create_comments.rb" added="2018-04-06T20:55:21Z" modified="2018-04-06T20:55:21Z" visited="2018-04-06T20:55:21Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-ruby"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-06T20:55:21Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/olya/blogger/app/models/comment.rb" added="2018-04-06T21:07:19Z" modified="2018-04-07T10:47:00Z" visited="2018-04-06T21:07:19Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-ruby"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T10:47:00Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/olya/blogger/app/views/articles/_comment.html.erb" added="2018-04-06T21:16:05Z" modified="2018-04-07T11:07:46Z" visited="2018-04-06T21:16:06Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T11:07:46Z" count="4"/>
+          <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-07T11:07:33Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/olya/blogger/app/views/comments/_form.html.erb" added="2018-04-06T21:29:08Z" modified="2018-04-07T11:06:17Z" visited="2018-04-06T21:29:08Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T11:06:17Z" count="7"/>
+          <bookmark:application name="nautilus" exec="&apos;gedit %U&apos;" modified="2018-04-06T21:29:11Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/olya/blogger/app/controllers/comments_controller.rb" added="2018-04-07T11:00:59Z" modified="2018-04-07T11:01:12Z" visited="2018-04-07T11:00:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-ruby"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2018-04-07T11:01:12Z" count="2"/>
         </bookmark:applications>
       </metadata>
     </info>
